@@ -52,6 +52,21 @@ $('#extract').click(function() {
   }
 });
 
+$('#copy').click(function() {
+  element = document.querySelector('.copy-source');
+  range = document.createRange();
+  range.selectNode(element);
+  window.getSelection().addRange(range);
+
+  try {
+    var success = document.execCommand('copy');
+  } catch(err) {
+    console.log('Copying failed, try a browser that isn\'t Safari.');
+  }
+
+  window.getSelection().removeAllRanges();
+});
+
 sandbox = {
   sweref99: '+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
   platsrEndpoint: 'http://localhost:10080/platsr/api/v1/', // CORS enabled proxy
