@@ -3,14 +3,52 @@ $('#uriForm').keyup(function() {
 });
 
 $('#searchForm').keyup(function() {
-  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?text=' + $('#searchForm').val());
+  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val());
+  sandbox.requestUrl = 'place?text=' + $('#searchForm').val();
+
+  if ($('#extract').is(":checked")) {
+    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+  }
+});
+
+$('#bboxForm').keyup(function() {
+  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
+  sandbox.requestUrl = 'place?bbox=' + $('#bboxForm').val();
+
+  if ($('#extract').is(":checked")) {
+    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+  }
+});
+
+$('#lradiusForm').keyup(function() {
+  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
+  sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
+
+  if ($('#extract').is(":checked")) {
+    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+  }
+});
+
+$('#dradiusForm').keyup(function() {
+  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
+  sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
+
+  if ($('#extract').is(":checked")) {
+    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+  }
 });
 
 $('#extract').click(function() {
   if ($('#extract').is(":checked")) {
     $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
   } else {
     $('#requestUrlForm').val($('#requestUrlForm').val().replace('&extracted=true',''));
+    sandbox.requestUrl = sandbox.requestUrl.replace('&extracted=true', '');
   }
 });
 
@@ -49,6 +87,9 @@ sandbox = {
         result = result.replace(/>/g, '&gt;');
 
         $('#resultContainer').text(result);
+      },
+      error: function() {
+        $('.alert').show();
       }
     });
   },
@@ -71,37 +112,40 @@ sandbox = {
       case 'text':
         $('#searchField').show();
         $('#extractField').show();
+        sandbox.requestType = 'text';
 
         if ($('#extract').is(":checked")) {
           sandbox.requestUrl = '?text=' + $('#searchForm').val() + '&extracted=true';
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?text=' + $('#searchForm').val() + '&extracted=true');
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val() + '&extracted=true');
         } else {
           sandbox.requestUrl = '?text=' + $('#searchForm').val();
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?text=' + $('#searchForm').val());
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val());
         }
         break;
       case 'bbbox':
         $('#bboxField').show();
         $('#extractField').show();
+        sandbox.requestType = 'bbbox';
 
         if ($('#extract').is(":checked")) {
-          sandbox.requestUrl = '?bbox=' + $('#bboxForm').val() + '&extracted=true';
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?bbox=' + $('#bboxForm').val() + '&extracted=true');
+          sandbox.requestUrl = 'place?bbox=' + $('#bboxForm').val() + '&extracted=true';
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val() + '&extracted=true');
         } else {
-          sandbox.requestUrl = '?bbox=' + $('#bboxForm').val();
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?bbox=' + $('#bboxForm').val());
+          sandbox.requestUrl = 'place?bbox=' + $('#bboxForm').val();
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
         }
         break;
       default: //radius
         $('#lradiusField').show();
         $('#extractField').show();
+        sandbox.requestType = 'radius';
 
         if ($('#extract').is(":checked")) {
-        sandbox.requestUrl = '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val() + '&extracted=true';
-        $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val() + '&extracted=true');
+          sandbox.requestUrl = 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val() + '&extracted=true';
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val() + '&extracted=true');
         } else {
-        sandbox.requestUrl = '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
-        $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
+          sandbox.requestUrl = 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
         }
         break;
     }
@@ -110,10 +154,9 @@ sandbox = {
   prepareRequest: function() {
     if ($.inArray(sandbox.requestType, sandbox.itemTypes) != -1) {
       requestString = sandbox.platsrEndpoint + sandbox.requestType + '/' + $('#uriForm').val() + '?prettyPrinting=true';
-      console.log(requestString)
       sandbox.platsrRequest(requestString);
     } else if($.inArray(sandbox.requestType, sandbox.platsrMethods) != -1) {
-      console.log('weehoo method exists');
+      sandbox.platsrRequest(sandbox.platsrEndpoint + sandbox.requestUrl + '&prettyPrinting=true');
     }
   }
 }
