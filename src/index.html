@@ -7,6 +7,12 @@
 
 		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+		<style>
+		#leaflet {
+		  width: 100%;
+		  height: 450px;
+		}
+		</style>
 	</head>
 	<body>
 		<div class="fluid-container">
@@ -49,7 +55,7 @@
 							<div class="input-group">
 								<input type="text" class="form-control" id="lradiusForm" value="519412,6468281">
 								<span class="input-group-btn">
-									<button class="btn btn-secondary" type="button">Map</button>
+									<button class="btn btn-secondary" type="button" id="pointMapBtn" data-toggle="modal" data-target="#modal">Map</button>
 								</span>
 							</div>
 							<label for="dradiusForm">Radius</label>
@@ -69,6 +75,17 @@
 					</div>
 
 					<button type="button" class="btn btn-primary" onclick="sandbox.prepareRequest()">Run</button>
+
+					<div class="modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h2>Pick a location!</h2>
+								</div>
+								<div class="modal-body" id="leaflet"></div>
+							</div>
+						</div>
+					</div>
 				</form>
 
 				<div class="alert alert-warning alert-dismissible" role="alert" style="display: none">

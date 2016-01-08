@@ -52,23 +52,34 @@ $('#extract').click(function() {
   }
 });
 
+$('#pointMapBtn').click(function() {
+  sandbox.openModalPoint();
+});
+
 $('#copy').click(function() {
+  // select request url(.copy-source)
   element = document.querySelector('.copy-source');
   range = document.createRange();
   range.selectNode(element);
   window.getSelection().addRange(range);
 
+  // try copy selected url
   try {
-    var success = document.execCommand('copy');
+    document.execCommand('copy');
   } catch(err) {
     console.log('Copying failed, try a browser that isn\'t Safari.');
   }
 
+  // clear selection
   window.getSelection().removeAllRanges();
 });
 
 sandbox = {
   sweref99: '+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
+  epsg4326: '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs',
+  map: null,
+  mapCreated: false,
+
   platsrEndpoint: 'http://localhost:10080/platsr/api/v1/', // CORS enabled proxy
   dummyUrlPlaceholder: 'http://www.platsr.se/platsr/api/v1/',
   itemTypes: [
@@ -173,5 +184,41 @@ sandbox = {
     } else if($.inArray(sandbox.requestType, sandbox.platsrMethods) != -1) {
       sandbox.platsrRequest(sandbox.platsrEndpoint + sandbox.requestUrl + '&prettyPrinting=true');
     }
+  },
+
+  createMap: function() {
+    if (!sandbox.mapCreated) {
+      sandbox.map = L.map('leaflet').setView([59.3251172, 18.0710935], 10);
+      L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors & <a href="http://openstreetmap.se/">OpenStreetMap Sverige</a>',
+        maxZoom: 18,
+        subdomains: 'abc'
+      }).addTo(sandbox.map);
+      sandbox.mapCreated = true;
+    }
+  },
+
+  openModalPoint: function() {
+    window.setTimeout(function() {
+      sandbox.createMap();
+
+      $('#leaflet').css('cursor', 'crosshair');
+
+      sandbox.map.on('click', function(e) {
+        l = proj4(sandbox.epsg4326, sandbox.sweref99, [e.latlng.lat, e.latlng.lng]);
+
+        $('#lradiusForm').val(Math.round(l[0]) + ',' + Math.round(l[1]));
+        $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
+        sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
+
+        if ($('#extract').is(":checked")) {
+          $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+          sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+        }
+
+        $('#modal').modal('hide');
+        $('#leaflet').css('cursor', 'default');
+      });
+    }, 500);
   }
 }
