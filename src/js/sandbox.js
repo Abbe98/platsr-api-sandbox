@@ -56,6 +56,10 @@ $('#pointMapBtn').click(function() {
   sandbox.openModalPoint();
 });
 
+$('#bboxMapBtn').click(function() {
+  sandbox.openModalBbox();
+});
+
 $('#copy').click(function() {
   // select request url(.copy-source)
   element = document.querySelector('.copy-source');
@@ -74,11 +78,18 @@ $('#copy').click(function() {
   window.getSelection().removeAllRanges();
 });
 
+$('#modal').on('hidden.bs.modal', function (e) {
+  $('#leaflet').css('cursor', 'default');
+  sandbox.areaSelect.remove();
+})
+
 sandbox = {
   sweref99: '+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
   epsg4326: '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs',
   map: null,
   mapCreated: false,
+  areaSelect: null,
+  mapMode: undefined,
 
   platsrEndpoint: 'http://localhost:10080/platsr/api/v1/', // CORS enabled proxy
   dummyUrlPlaceholder: 'http://www.platsr.se/platsr/api/v1/',
@@ -199,25 +210,52 @@ sandbox = {
   },
 
   openModalPoint: function() {
+    sandbox.mapMode = 'point';
     window.setTimeout(function() {
       sandbox.createMap();
 
       $('#leaflet').css('cursor', 'crosshair');
 
       sandbox.map.on('click', function(e) {
-        l = proj4(sandbox.epsg4326, sandbox.sweref99, [e.latlng.lat, e.latlng.lng]);
+        if (sandbox.mapMode !== 'bbox') {
+          l = proj4(sandbox.epsg4326, sandbox.sweref99, [e.latlng.lat, e.latlng.lng]);
 
-        $('#lradiusForm').val(Math.round(l[0]) + ',' + Math.round(l[1]));
-        $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
-        sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
+          $('#lradiusForm').val(Math.round(l[0]) + ',' + Math.round(l[1]));
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
+          sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
 
-        if ($('#extract').is(":checked")) {
-          $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-          sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+          if ($('#extract').is(":checked")) {
+            $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+            sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+          }
+
+          $('#modal').modal('hide');
+          $('#leaflet').css('cursor', 'default');
         }
+      });
+    }, 500);
+  },
 
+  openModalBbox: function() {
+    sandbox.mapMode = 'bbox';
+    window.setTimeout(function() {
+      sandbox.createMap();
+      sandbox.areaSelect = L.areaSelect({width:200, height:300});
+      sandbox.areaSelect.addTo(sandbox.map);
+      $('#bboxSubmitBtn').show();
+
+      $('#bboxSubmitBtn').click(function() {
+        box = sandbox.areaSelect.getBounds();
+        l = [];
+        l[0] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._northEast.lat, box._northEast.lng]);
+        l[1] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._southWest.lat, box._southWest.lng]);
+
+          $('#bboxForm').val(Math.round(l[0][0]) + ',' + Math.round(l[0][1]) + ',' + Math.round(l[1][0]) + ',' + Math.round(l[1][1]));
+          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
+          sandbox.requestUrl = sandbox.platsrEndpoint + 'place?bbox=' + $('#bboxForm').val();
+
+        $('#bboxSbumitBtn').hide();
         $('#modal').modal('hide');
-        $('#leaflet').css('cursor', 'default');
       });
     }, 500);
   }

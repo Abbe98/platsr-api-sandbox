@@ -45,7 +45,7 @@
 							<div class="input-group">
 								<input type="text" class="form-control" id="bboxForm" value="751050,6635000,758242,6429670">
 								<span class="input-group-btn">
-									<button class="btn btn-secondary" type="button">Map</button>
+									<button class="btn btn-secondary" type="button" id="bboxMapBtn" data-toggle="modal" data-target="#modal">Map</button>
 								</span>
 							</div>
 						</fieldset>
@@ -79,10 +79,8 @@
 					<div class="modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
-								<div class="modal-header">
-									<h2>Pick a location!</h2>
-								</div>
 								<div class="modal-body" id="leaflet"></div>
+								<button type="button" class="btn btn-primary" id="bboxSubmitBtn" style="position: fixed; right: 5px; bottom: 22px; display:none;">OK</button>
 							</div>
 						</div>
 					</div>
@@ -120,6 +118,9 @@
 		<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		<script src="libs/leaflet-areaselect.js"></script>
 		<script src="js/sandbox.js"></script>
+
+		<link rel="stylesheet" href="libs/leaflet-areaselect.css" />
 	</body>
 </html>
