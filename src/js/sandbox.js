@@ -81,6 +81,7 @@ $('#copy').click(function() {
 $('#modal').on('hidden.bs.modal', function (e) {
   $('#leaflet').css('cursor', 'default');
   sandbox.areaSelect.remove();
+  $('#bboxSubmitBtn').hide();
 })
 
 sandbox = {
@@ -152,10 +153,10 @@ sandbox = {
         sandbox.requestType = 'text';
 
         if ($('#extract').is(":checked")) {
-          sandbox.requestUrl = '?text=' + $('#searchForm').val() + '&extracted=true';
+          sandbox.requestUrl = 'place?text=' + $('#searchForm').val() + '&extracted=true';
           $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val() + '&extracted=true');
         } else {
-          sandbox.requestUrl = '?text=' + $('#searchForm').val();
+          sandbox.requestUrl = 'place?text=' + $('#searchForm').val();
           $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val());
         }
         break;
@@ -254,7 +255,7 @@ sandbox = {
           $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
           sandbox.requestUrl = sandbox.platsrEndpoint + 'place?bbox=' + $('#bboxForm').val();
 
-        $('#bboxSbumitBtn').hide();
+        $('#bboxSubmitBtn').hide();
         $('#modal').modal('hide');
       });
     }, 500);

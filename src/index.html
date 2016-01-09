@@ -8,14 +8,91 @@
 		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
 		<style>
-		#leaflet {
+		.btn-primary,
+		.btn-primary:hover,
+		.btn-primary:focus {
+		  background-color: #D65128;
+		  border-color: #D65128;
+		}
+
+		a,
+		a:hover,
+		a:focus {
+		  color: #D65128;
+		}
+
+		.list-group-item.active,
+		.list-group-item.active:hover,
+		.list-group-item.active:focus {
+		  background-color: #D65128;
+		  border-color: #D65128;
+		}
+
+		.c-input > input:checked ~ .c-indicator {
+		  background-color: #D65128;
+		}
+
+		.abbe {
+		  position: relative;
+		  display: inline-block;
+		  margin: 10px 5px;
+		  outline: none;
+		  padding: 10px 10px;
+		  text-decoration: none;
+		  color: #333;
+		  text-shadow: 0 0 1px rgba(255,255,255,0.3);
+		}
+
+		.abbe::before,
+		.abbe::after  {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
 		  width: 100%;
-		  height: 450px;
+		  height: 100%;
+		  border: 3px solid #EDF7D2;
+		  content: '';
+		  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+		  -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+		  transition: transform 0.3s, opacity 0.3s;
+		}
+
+		.abbe::after  {
+		  border-color: #4B3B47;
+		  opacity: 0;
+		  -webkit-transform: translateY(-7px) translateX(6px);
+		  -moz-transform: translateY(-7px) translateX(6px);
+		  transform: translateY(-7px) translateX(6px);
+		}
+
+		.abbe:hover,
+		.abbe:focus {
+		  color: rgb(55, 58, 60);
+		  text-decoration: none;
+		}
+
+		.abbe:hover::before,
+		.abbe:focus::before {
+		  opacity: 0;
+		  -webkit-transform: translateY(5px) translateX(-5px);
+		  -moz-transform: translateY(5px) translateX(-5px);
+		  transform: translateY(5px) translateX(-5px);
+		}
+
+		.abbe:hover::after,
+		.abbe:focus::after  {
+		  opacity: 1;
+		  -webkit-transform: translateY(0px) translateX(0px);
+		  -moz-transform: translateY(0px) translateX(0px);
+		  transform: translateY(0px) translateX(0px);
 		}
 		</style>
 	</head>
 	<body>
 		<div class="fluid-container">
+			<div class="row" style="padding-bottom: 12px; margin: auto;">
+				<header class="col-md-12 navbar navbar-light" style="background-color: #D65128;"><h1 class="navbar-brand" style="color: #fff; padding-left: 12px;">Platsr API Sandbox</h1></header>
+			</div>
 			<div class="col-md-9">
 				<form>
 					<fieldset class="form-group">
@@ -37,7 +114,7 @@
 
 						<fieldset class="form-group" style="display: none;" id="searchField">
 							<label for="searchForm">Search Text</label>
-							<input type="text" class="form-control" id="searchForm" value="Search String">
+							<input type="text" class="form-control" id="searchForm" value="Katrineholm">
 						</fieldset>
 
 						<fieldset class="form-group" style="display: none;" id="bboxField">
@@ -79,7 +156,7 @@
 					<div class="modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
-								<div class="modal-body" id="leaflet"></div>
+								<div class="modal-body" id="leaflet" style="width: 100%; height: 450px;"></div>
 								<button type="button" class="btn btn-primary" id="bboxSubmitBtn" style="position: fixed; right: 5px; bottom: 22px; display:none;">OK</button>
 							</div>
 						</div>
@@ -94,10 +171,59 @@
 				</div>
 
 				<pre><code id="resultContainer" class="language-javascript"></code></pre>
+
+				<footer>
+					<nav class="nav nav-inline">
+						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
+						<a class="nav-link" href="#">Help</a>
+						<a class="nav-link" href="#">API Docs</a>
+						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
+					</nav>
+				</footer>
+
+				<div class="modal" id="about" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2>About</h2>
+								<span>Sandbox for the Platsr API.</span>
+							</div>
+
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="row">
+
+										<div class="col-md-6">
+											<h3>Libraries</h3>
+											<ul>
+												<li><a href="http://getbootstrap.com/">Bootstrap</a> - <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://leafletjs.com/">Leaflet</a> - <a href="https://github.com/Leaflet/Leaflet/blob/master/LICENSE">MIT</a></li>
+												<li><a href="https://github.com/heyman/leaflet-areaselect">Leaflet AreaSelect</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="https://github.com/Abbe98/proxy-gae">proxy-gae</a></li>
+											</ul>
+										</div>
+										<div class="col-md-6">
+											<h3>Services</h3>
+											<ul>
+												<li><a href="http://www.platsr.nu/platsrs-api/">Platsr API</a></li>
+												<li><a href="https://github.com/">Github</a> - Hosting</li>
+												<li><a href="https://cloud.google.com/appengine/">Google App Engine</a> - Backend hosting</li>
+												<li><a href="http://openstreetmap.se/tjanster">OpenStreetMap Sverige</a> - Map tiles</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="text-align: left;">
+								Developed by <a href="http://abbe98.github.io/" class="abbe">Albin Larsson</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="col-md-3 list-group">
-				<button class="list-group-item" onclick="sandbox.methodInit('text'); $(this).addClass('active')">Text Search</button>
+				<button class="list-group-item" id="initBtn" onclick="sandbox.methodInit('text'); $(this).addClass('active')">Text Search</button>
 				<button class="list-group-item" onclick="sandbox.methodInit('bbbox'); $(this).addClass('active')">Bounding Box</button>
 				<button class="list-group-item" onclick="sandbox.methodInit('radius'); $(this).addClass('active')">Location Radius</button>
 				<button class="list-group-item" onclick="sandbox.itemInit('bookmark'); $(this).addClass('active')">Bookmark</button>
@@ -122,5 +248,8 @@
 		<script src="js/sandbox.js"></script>
 
 		<link rel="stylesheet" href="libs/leaflet-areaselect.css" />
+		<script>
+		  sandbox.methodInit('text'); $('#initBtn').addClass('active');
+		</script>
 	</body>
 </html>
