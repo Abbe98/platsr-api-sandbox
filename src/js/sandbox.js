@@ -211,7 +211,7 @@ sandbox = {
 
       sandbox.map.on('click', function(e) {
         if (sandbox.mapMode !== 'bbox') {
-          l = proj4(sandbox.epsg4326, sandbox.sweref99, [e.latlng.lat, e.latlng.lng]);
+          l = proj4(sandbox.epsg4326, sandbox.sweref99, [e.latlng.lng, e.latlng.lat]);
 
           $('#lradiusForm').val(Math.round(l[0]) + ',' + Math.round(l[1]));
           $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
