@@ -248,8 +248,9 @@ sandbox = {
       $('#bboxSubmitBtn').click(function() {
         box = sandbox.areaSelect.getBounds();
         l = [];
-        l[0] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._northEast.lat, box._northEast.lng]);
-        l[1] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._southWest.lat, box._southWest.lng]);
+        l[0] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._northEast.lng, box._northEast.lat]);
+        l[1] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._southWest.lng, box._southWest.lat]);
+
 
           $('#bboxForm').val(Math.round(l[0][0]) + ',' + Math.round(l[0][1]) + ',' + Math.round(l[1][0]) + ',' + Math.round(l[1][1]));
           $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
