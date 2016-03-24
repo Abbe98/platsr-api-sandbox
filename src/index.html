@@ -32,6 +32,15 @@
 		  background-color: #D65128;
 		}
 
+		.alert-container {
+			position: absolute;
+			float: right;
+			min-width: 30%;
+			right: 7px;
+			top: 7px;
+			height: 100%;
+		}
+
 		.abbe {
 		  position: relative;
 		  display: inline-block;
@@ -239,6 +248,8 @@
 				<button class="list-group-item" onclick="sandbox.itemInit('video'); $(this).addClass('active')">Video</button>
 			</div>
 		</div>
+
+		<div class="alert-container"></div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>

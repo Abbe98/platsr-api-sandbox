@@ -6,50 +6,32 @@ $('#searchForm').keyup(function() {
   $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val());
   sandbox.requestUrl = 'place?text=' + $('#searchForm').val();
 
-  if ($('#extract').is(":checked")) {
-    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
-  }
+  sandbox.setExtractParameter();
 });
 
 $('#bboxForm').keyup(function() {
   $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
   sandbox.requestUrl = 'place?bbox=' + $('#bboxForm').val();
 
-  if ($('#extract').is(":checked")) {
-    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
-  }
+  sandbox.setExtractParameter();
 });
 
 $('#lradiusForm').keyup(function() {
   $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
   sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
 
-  if ($('#extract').is(":checked")) {
-    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
-  }
+  sandbox.setExtractParameter();
 });
 
 $('#dradiusForm').keyup(function() {
   $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
   sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
 
-  if ($('#extract').is(":checked")) {
-    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
-  }
+  sandbox.setExtractParameter();
 });
 
 $('#extract').click(function() {
-  if ($('#extract').is(":checked")) {
-    $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-    sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
-  } else {
-    $('#requestUrlForm').val($('#requestUrlForm').val().replace('&extracted=true',''));
-    sandbox.requestUrl = sandbox.requestUrl.replace('&extracted=true', '');
-  }
+  sandbox.setExtractParameter();
 });
 
 $('#pointMapBtn').click(function() {
@@ -70,6 +52,7 @@ $('#copy').click(function() {
   // try copy selected url
   try {
     document.execCommand('copy');
+    $('.alert-container').append('<div class="alert alert-info alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Copied!</strong></div>');
   } catch(err) {
     console.log('Copying failed, try a browser that isn\'t Safari.');
   }
@@ -115,6 +98,15 @@ sandbox = {
   requestUrl: '',
   requestType: '',
 
+  setExtractParameter: function() {
+    if ($('#extract').is(":checked")) {
+      $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
+      sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+    } else {
+      $('#requestUrlForm').val($('#requestUrlForm').val().replace('&extracted=true',''));
+      sandbox.requestUrl = sandbox.requestUrl.replace('&extracted=true', '');
+    }
+  },
 
   platsrRequest: function(requestString) {
     $.ajax({
@@ -250,7 +242,6 @@ sandbox = {
         l = [];
         l[0] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._northEast.lng, box._northEast.lat]);
         l[1] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._southWest.lng, box._southWest.lat]);
-
 
           $('#bboxForm').val(Math.round(l[0][0]) + ',' + Math.round(l[0][1]) + ',' + Math.round(l[1][0]) + ',' + Math.round(l[1][1]));
           $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
