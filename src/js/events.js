@@ -43,6 +43,9 @@ $('#bboxMapBtn').click(function() {
 });
 
 $('#copy').click(function() {
+  // clear selection if there is any
+  window.getSelection().removeAllRanges();
+
   // select request url(.copy-source)
   element = document.querySelector('.copy-source');
   range = document.createRange();
