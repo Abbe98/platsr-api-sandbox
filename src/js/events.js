@@ -60,25 +60,22 @@ $('#bboxMapBtn').click(function() {
 // Copy Functions
 
 $('#copy').click(function() {
-  // clear selection if there is any
-  window.getSelection().removeAllRanges();
-
-  // select request url(.copy-source)
-  element = document.querySelector('.copy-source');
-  range = document.createRange();
-  range.selectNode(element);
-  window.getSelection().addRange(range);
-
   // try copy selected url
+
+  // select request url
+  element = document.querySelector('#requestUrlForm');
+  // disabled inputs can not be selected by select()...
+  element.disabled = false;
+  element.select();
   try {
-    document.execCommand('copy');
+    // copy
+     var successful = document.execCommand('copy');
     $('.alert-container').append('<div class="alert alert-info alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Copied!</strong></div>');
   } catch(err) {
     console.log('Copying failed, try a browser that isn\'t Safari.');
   }
 
-  // clear selection
-  window.getSelection().removeAllRanges();
+  element.disabled = true;
 });
 
 $('#modal').on('hidden.bs.modal', function (e) {
