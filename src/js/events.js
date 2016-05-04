@@ -1,39 +1,54 @@
-$('#uriForm').keyup(function() {
-  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + sandbox.requestUrl + $('#uriForm').val());
+$('#uriForm').on('input', function() {
+  sandbox.setItemUri();
+  sandbox.displayRelevantFields();
 });
 
-$('#searchForm').keyup(function() {
-  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val());
-  sandbox.requestUrl = 'place?text=' + $('#searchForm').val();
-
-  sandbox.setExtractParameter();
+$('#userIdField').on('input', function() {
+  sandbox.setUserIdParameter();
+  sandbox.displayRelevantFields();
 });
 
-$('#bboxForm').keyup(function() {
-  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
-  sandbox.requestUrl = 'place?bbox=' + $('#bboxForm').val();
-
-  sandbox.setExtractParameter();
+$('#archiveObjectUrlField').on('input', function() {
+  sandbox.setArchiveObjectUrlParameter();
+  sandbox.displayRelevantFields();
 });
 
-$('#lradiusForm').keyup(function() {
-  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
-  sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
-
-  sandbox.setExtractParameter();
+$('#searchForm').on('input', function() {
+  sandbox.setTextParameter();
+  sandbox.displayRelevantFields();
 });
 
-$('#dradiusForm').keyup(function() {
-  $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
-  sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
+$('#bboxForm').on('input', function() {
+  sandbox.setBBoxParameter();
+  sandbox.displayRelevantFields();
+});
 
-  sandbox.setExtractParameter();
+$('#lradiusForm').on('input', function() {
+  sandbox.setPointParameter();
+  sandbox.displayRelevantFields();
+});
+
+$('#dradiusForm').on('input', function() {
+  sandbox.setRadiusParameter();
+  sandbox.displayRelevantFields();
+});
+
+// Check boxes
+
+$('#orderByModifiedField').click(function() {
+  sandbox.setOrderByParameter();
+  sandbox.displayRelevantFields();
+});
+
+$('#sortDescField').click(function() {
+  sandbox.setSortParameter();
 });
 
 $('#extract').click(function() {
   sandbox.setExtractParameter();
 });
 
+// Map Buttons
 $('#pointMapBtn').click(function() {
   sandbox.openModalPoint();
 });
@@ -41,6 +56,8 @@ $('#pointMapBtn').click(function() {
 $('#bboxMapBtn').click(function() {
   sandbox.openModalBbox();
 });
+
+// Copy Functions
 
 $('#copy').click(function() {
   // clear selection if there is any
@@ -66,6 +83,8 @@ $('#copy').click(function() {
 
 $('#modal').on('hidden.bs.modal', function (e) {
   $('#leaflet').css('cursor', 'default');
-  sandbox.areaSelect.remove();
+  if (sandbox.mapMode == 'bbox') {
+    sandbox.areaSelect.remove();
+  }
   $('#bboxSubmitBtn').hide();
 });

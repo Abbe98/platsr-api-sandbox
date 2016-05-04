@@ -5,41 +5,153 @@ sandbox = {
   mapCreated: false,
   areaSelect: null,
   mapMode: undefined,
+  activeMethod: undefined,
 
   platsrEndpoint: 'http://localhost:10080/platsr/api/v1/', // CORS enabled proxy
   dummyUrlPlaceholder: 'http://www.platsr.se/platsr/api/v1/',
-  itemTypes: [
-              'bookmark',
-              'collection',
-              'comment',
-              'copyright',
-              'image',
-              'place',
-              'sound',
-              'story',
-              'tag',
-              'user',
-              'video'
-            ],
-  platsrMethods: [
-                   'text',
-                   'radius',
-                   'bbbox'
-  ],
-  requestUrl: '',
-  requestType: '',
 
   setExtractParameter: function() {
-    if ($('#extract').is(":checked")) {
-      $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-      sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
+    if ($('#extract').is(':checked')) {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('extracted')
+        .addSearch('extracted', 'true')
+        .readable());
     } else {
-      $('#requestUrlForm').val($('#requestUrlForm').val().replace('&extracted=true',''));
-      sandbox.requestUrl = sandbox.requestUrl.replace('&extracted=true', '');
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('extracted'));
     }
   },
 
-  platsrRequest: function(requestString) {
+  setUserIdParameter: function() {
+    if ($('#userIdField').val() !== '') {
+            $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+              .removeSearch('userId')
+              .addSearch('userId', $('#userIdField').val())
+              .readable());
+    } else {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('userId'));
+    }
+  },
+
+  setArchiveObjectUrlParameter: function() {
+    if ($('#archiveObjectUrlField').val() !== '') {
+      $('#requestUrlForm').val(
+        URI($('#requestUrlForm').val())
+          .removeSearch('archiveObjectUrl')
+          .addSearch('archiveObjectUrl', $('#archiveObjectUrlField').val())
+          .readable());
+    } else {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('archiveObjectUrl'));
+    }
+  },
+
+  setOrderByParameter: function() {
+    if ($('#userIdField').val() !== '' || $('#archiveObjectUrlField').val() !== '') {
+      if ($('#orderByModifiedField').is(':checked')) {
+        $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+          .removeSearch('orderBy')
+          .addSearch('orderBy', 'modified')
+          .readable());
+      } else {
+        $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+          .removeSearch('orderBy'));
+      }
+    }
+  },
+
+  setSortParameter: function() {
+    if ($('#userIdField').val() !== '' || $('#archiveObjectUrlField').val() !== '') {
+      if ($('#sortDescField').is(':checked')) {
+        $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+          .removeSearch('sortBy')
+          .addSearch('sortBy', 'desc')
+          .readable());
+      } else {
+        $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+          .removeSearch('sortBy'));
+      }
+    }
+  },
+
+  setLimitParameter: function() {
+    if ($('#userIdField').val() !== '' || $('#archiveObjectUrlField').val() !== '') {
+      if ($('#limitField').val() !== '') {
+        $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+          .removeSearch('limit')
+          .addSearch('limit', $('#limitField').val())
+          .readable());
+      } else {
+        $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+          .removeSearch('limit'));
+      }
+    }
+  },
+
+  setTextParameter: function() {
+    if ($('#searchForm').val() !== '') {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('text')
+        .addSearch('text', $('#searchForm').val())
+        .readable());
+    } else {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('text'));
+    }
+  },
+
+  setRadiusParameter: function() {
+    if ($('#dradiusForm').val() !== '' && $('#lradiusForm').val() !== '') {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('radius')
+        .addSearch('radius', $('#dradiusForm').val())
+        .readable());
+    } else {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('radius'));
+    }
+  },
+
+  setPointParameter: function() {
+    if ($('#lradiusForm').val() !== '') {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('point')
+        .addSearch('point', $('#lradiusForm').val())
+        .readable());
+    } else {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('point'));
+    }
+  },
+
+  setBBoxParameter: function() {
+    if ($('#bboxForm').val() !== '') {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('bbox')
+        .addSearch('bbox', $('#bboxForm').val())
+        .readable());
+    } else {
+      $('#requestUrlForm').val(URI($('#requestUrlForm').val())
+        .removeSearch('bbox'));
+    }
+  },
+
+  setItemUri: function() {
+    if ($('#uriForm').val() !== '') {
+      $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + sandbox.activeMethod + '/' + $('#uriForm').val());
+    } else {
+      $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + sandbox.activeMethod);
+    }
+  },
+
+  platsrRequest: function() {
+    if (/\?/g.test($('#requestUrlForm').val())) {
+      requestString = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, sandbox.platsrEndpoint) + '&prettyPrinting=true';
+    } else {
+      requestString = requestString = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, sandbox.platsrEndpoint) + '?prettyPrinting=true';
+    }
+
     $.ajax({
       url: requestString,
       dataType: 'text',
@@ -55,69 +167,42 @@ sandbox = {
     });
   },
 
-  itemInit: function(typeString) {
+  init: function(method) {
+    // reset all optional fields
+    sandbox.resetOptionalFields();
+    // reset all other fields
+    $('#uriForm').val('');
+    $('#searchForm').val('');
+    $('#bboxForm').val('');
+    $('#lradiusForm').val('');
+    $('#dradiusForm').val('');
+    $('#archiveObjectUrlField').val('');
+    $('#userIdField').val('');
+    // hide all fields by default
     $('#fieldContainer').children().hide();
+    // clear active elements
+    $('.active').removeClass('active');
+    // update dummy URL
+    $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + method);
+    // all methods supports URIs? #TODO
     $('#uriField').show();
-    $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + typeString + '/');
-    $('.active').removeClass('active');
+    // save method
+    sandbox.activeMethod = method;
 
-    sandbox.requestUrl = typeString + '/';
-    sandbox.requestType = typeString;
-  },
+    if (method == 'place') {
+      $('#extractField').show();
 
-  methodInit: function(methodString) {
-    $('#fieldContainer').children().hide();
-    $('.active').removeClass('active');
+      $('#userIdSet').show();
 
-    switch (methodString) {
-      case 'text':
-        $('#searchField').show();
-        $('#extractField').show();
-        sandbox.requestType = 'text';
+      $('#searchField').show();
+      $('#bboxField').show();
+      $('#lradiusField').show();
+      $('#archiveObjectUrlSet').show();
 
-        if ($('#extract').is(":checked")) {
-          sandbox.requestUrl = 'place?text=' + $('#searchForm').val() + '&extracted=true';
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val() + '&extracted=true');
-        } else {
-          sandbox.requestUrl = 'place?text=' + $('#searchForm').val();
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?text=' + $('#searchForm').val());
-        }
-        break;
-      case 'bbbox':
-        $('#bboxField').show();
-        $('#extractField').show();
-        sandbox.requestType = 'bbbox';
-
-        if ($('#extract').is(":checked")) {
-          sandbox.requestUrl = 'place?bbox=' + $('#bboxForm').val() + '&extracted=true';
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val() + '&extracted=true');
-        } else {
-          sandbox.requestUrl = 'place?bbox=' + $('#bboxForm').val();
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
-        }
-        break;
-      default: //radius
-        $('#lradiusField').show();
-        $('#extractField').show();
-        sandbox.requestType = 'radius';
-
-        if ($('#extract').is(":checked")) {
-          sandbox.requestUrl = 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val() + '&extracted=true';
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val() + '&extracted=true');
-        } else {
-          sandbox.requestUrl = 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + '?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
-        }
-        break;
-    }
-  },
-
-  prepareRequest: function() {
-    if ($.inArray(sandbox.requestType, sandbox.itemTypes) != -1) {
-      requestString = sandbox.platsrEndpoint + sandbox.requestType + '/' + $('#uriForm').val() + '?prettyPrinting=true';
-      sandbox.platsrRequest(requestString);
-    } else if($.inArray(sandbox.requestType, sandbox.platsrMethods) != -1) {
-      sandbox.platsrRequest(sandbox.platsrEndpoint + sandbox.requestUrl + '&prettyPrinting=true');
+    } else if (method == 'copyright') {
+      //do nothing.
+    } else {
+      $('#userIdSet').show();
     }
   },
 
@@ -145,13 +230,8 @@ sandbox = {
           l = proj4(sandbox.epsg4326, sandbox.sweref99, [e.latlng.lng, e.latlng.lat]);
 
           $('#lradiusForm').val(Math.round(l[0]) + ',' + Math.round(l[1]));
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val());
-          sandbox.requestUrl = sandbox.platsrEndpoint + 'place?point=' + $('#lradiusForm').val() + '&radius=' + $('#dradiusForm').val();
-
-          if ($('#extract').is(":checked")) {
-            $('#requestUrlForm').val($('#requestUrlForm').val() + '&extracted=true');
-            sandbox.requestUrl = sandbox.requestUrl + '&extracted=true';
-          }
+          sandbox.setPointParameter();
+          sandbox.displayRelevantFields();
 
           $('#modal').modal('hide');
           $('#leaflet').css('cursor', 'default');
@@ -175,12 +255,74 @@ sandbox = {
         l[1] = proj4(sandbox.epsg4326, sandbox.sweref99, [box._southWest.lng, box._southWest.lat]);
 
           $('#bboxForm').val(Math.round(l[0][0]) + ',' + Math.round(l[0][1]) + ',' + Math.round(l[1][0]) + ',' + Math.round(l[1][1]));
-          $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + 'place?bbox=' + $('#bboxForm').val());
-          sandbox.requestUrl = sandbox.platsrEndpoint + 'place?bbox=' + $('#bboxForm').val();
+          sandbox.setBBoxParameter();
+          sandbox.displayRelevantFields();
 
         $('#bboxSubmitBtn').hide();
         $('#modal').modal('hide');
       });
     }, 500);
+  },
+
+  displayRelevantFields: function() {
+    $('#uriField').hide();
+    $('#extractField').hide();
+    $('#userIdSet').hide();
+    $('#archiveObjectUrlSet').hide();
+    $('#optionalGroup').hide();
+    $('#searchField').hide();
+    $('#bboxField').hide();
+    $('#lradiusField').hide();
+    $('#dradiusField').hide();
+
+    if ($('#uriForm').val() == '') {
+      if ($('#searchForm').val() == '') {
+        if ($('#bboxForm').val() == '') {
+          if ($('#lradiusForm').val() == '' && $('#dradiusForm').val() == '') {
+            if ($('#archiveObjectUrlField').val() == '' && $('#userIdField').val() == '') {
+              sandbox.init(sandbox.activeMethod);
+            } else {
+              sandbox.resetOptionalFields();
+              $('#optionalGroup').show();
+              if ($('#archiveObjectUrlField').val() !== '') {
+                $('#archiveObjectUrlSet').show();
+              } else {
+                sandbox.resetOptionalFields();
+                $('#userIdSet').show();
+              }
+            }
+          } else {
+            sandbox.resetOptionalFields();
+            $('#lradiusField').show();
+            $('#dradiusField').show();
+            $('#extractField').show();
+          }
+        } else {
+          sandbox.resetOptionalFields();
+          $('#bboxField').show();
+        }
+      } else {
+        sandbox.resetOptionalFields();
+        $('#searchField').show();
+        $('#extractField').show();
+      }
+    } else {
+      sandbox.resetOptionalFields();
+      $('#uriField').show();
+    }
+  },
+
+  resetOptionalFields: function() {
+    $('#extract').attr('checked', false);
+    sandbox.setExtractParameter();
+
+    $('#sortDescField').attr('checked', false);
+    sandbox.setSortParameter();
+
+    $('#orderByModifiedField').attr('checked', false);
+    sandbox.setOrderByParameter();
+
+    $('#limitField').val('');
+    sandbox.setLimitParameter();
   }
 }

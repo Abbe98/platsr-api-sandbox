@@ -21,11 +21,10 @@
 		  color: #D65128;
 		}
 
-		.list-group-item.active,
-		.list-group-item.active:hover,
-		.list-group-item.active:focus {
-		  background-color: #D65128;
-		  border-color: #D65128;
+		.nav-link.active,
+		.nav-link.active:hover,
+		.nav-link.active:focus {
+		  background-color: #D65128 !important;
 		}
 
 		.c-input > input:checked ~ .c-indicator {
@@ -123,13 +122,13 @@
 
 						<fieldset class="form-group" style="display: none;" id="searchField">
 							<label for="searchForm">Search Text</label>
-							<input type="text" class="form-control" id="searchForm" value="Katrineholm">
+							<input type="text" class="form-control" id="searchForm" placeholder="Katrineholm">
 						</fieldset>
 
 						<fieldset class="form-group" style="display: none;" id="bboxField">
 							<label for="bboxForm">Bounding Box</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="bboxForm" value="751050,6635000,758242,6429670">
+								<input type="text" class="form-control" id="bboxForm" placeholder="751050,6635000,758242,6429670">
 								<span class="input-group-btn">
 									<button class="btn btn-secondary" type="button" id="bboxMapBtn" data-toggle="modal" data-target="#modal">Map</button>
 								</span>
@@ -139,16 +138,49 @@
 						<fieldset class="form-group" style="display: none;" id="lradiusField">
 							<label for="lradiusForm">Center Location</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="lradiusForm" value="519412,6468281">
+								<input type="text" class="form-control" id="lradiusForm" placeholder="519412,6468281">
 								<span class="input-group-btn">
 									<button class="btn btn-secondary" type="button" id="pointMapBtn" data-toggle="modal" data-target="#modal">Map</button>
 								</span>
 							</div>
 							<label for="dradiusForm">Radius</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="dradiusForm" value="1000">
+								<input type="text" class="form-control" id="dradiusForm" placeholder="1000">
 								<div class="input-group-addon">meters</div>
 							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="userIdSet">
+							<label for="userIdField">User ID</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="userIdField" placeholder="Albin+Larsson"></input>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="archiveObjectUrlSet">
+							<label for="archiveObjectUrlField">Archive Object</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="archiveObjectUrlField" placeholder="raa/fmi/10090500420002"></input>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="optionalGroup">
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="orderByModifiedField">
+								<span class="c-indicator"></span>
+								Order by last time modified.
+							</label><br>
+
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="sortDescField">
+								<span class="c-indicator"></span>
+								Sort in descending order.
+							</label><br>
+
+								<label for="limitField">Limit</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="limitField" placeholder="50"></input>
+								</div>
 						</fieldset>
 
 						<fieldset style="display: none;" id="extractField">
@@ -160,7 +192,7 @@
 						</fieldset>
 					</div>
 
-					<button type="button" class="btn btn-primary" onclick="sandbox.prepareRequest()">Run</button>
+					<button type="button" class="btn btn-primary" onclick="sandbox.platsrRequest()">Run</button>
 
 					<div class="modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
@@ -231,28 +263,29 @@
 				</div>
 			</div>
 
-			<div class="col-md-3 list-group">
-				<button class="list-group-item" id="initBtn" onclick="sandbox.methodInit('text'); $(this).addClass('active')">Text Search</button>
-				<button class="list-group-item" onclick="sandbox.methodInit('bbbox'); $(this).addClass('active')">Bounding Box</button>
-				<button class="list-group-item" onclick="sandbox.methodInit('radius'); $(this).addClass('active')">Location Radius</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('bookmark'); $(this).addClass('active')">Bookmark</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('collection'); $(this).addClass('active')">Collection</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('comment'); $(this).addClass('active')">Comment</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('copyright'); $(this).addClass('active')">Copyright</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('image'); $(this).addClass('active')">Image</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('place'); $(this).addClass('active')">Place</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('sound'); $(this).addClass('active')">Sound</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('story'); $(this).addClass('active')">Story</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('tag'); $(this).addClass('active')">Tag</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('user'); $(this).addClass('active')">User</button>
-				<button class="list-group-item" onclick="sandbox.itemInit('video'); $(this).addClass('active')">Video</button>
-			</div>
+			<ul class="col-md-3 nav nav-pills nav-stacked">
+				<li role="button" class="nav-link" onclick="sandbox.init('archiveObject'); $(this).addClass('active')">Archive Object</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('bookmark'); $(this).addClass('active')">Bookmark</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('collection'); $(this).addClass('active')">Collection</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('comment'); $(this).addClass('active')">Comment</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('copyright'); $(this).addClass('active')">Copyright</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('image'); $(this).addClass('active')">Image</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('place'); $(this).addClass('active')" id="initBtn">Place</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('recomendation'); $(this).addClass('active')">Recommendation</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('sound'); $(this).addClass('active')">Sound</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('story'); $(this).addClass('active')">Story</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('tag'); $(this).addClass('active')">Tag</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('user'); $(this).addClass('active')">User</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('video'); $(this).addClass('active')">Video</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('webAdress'); $(this).addClass('active')">Web Address</li>
+			</ul>
 		</div>
 
 		<div class="alert-container"></div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+		<script src="libs/uri.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 		<script src="libs/leaflet-areaselect.js"></script>
@@ -261,7 +294,7 @@
 
 		<link rel="stylesheet" href="libs/leaflet-areaselect.css" />
 		<script>
-		  sandbox.methodInit('text'); $('#initBtn').addClass('active');
+		  sandbox.init('place'); $('#initBtn').addClass('active');
 		</script>
 	</body>
 </html>
