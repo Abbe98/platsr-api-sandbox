@@ -146,11 +146,7 @@ sandbox = {
   },
 
   platsrRequest: function() {
-    if (/\?/g.test($('#requestUrlForm').val())) {
-      requestString = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, sandbox.platsrEndpoint) + '&prettyPrinting=true';
-    } else {
-      requestString = requestString = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, sandbox.platsrEndpoint) + '?prettyPrinting=true';
-    }
+    requestString = URI($('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, sandbox.platsrEndpoint)).addSearch('prettyPrinting', 'true');
 
     $.ajax({
       url: requestString,
