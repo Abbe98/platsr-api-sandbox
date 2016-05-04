@@ -164,6 +164,8 @@ sandbox = {
   },
 
   init: function(method) {
+    // empty code container
+    $('#resultContainer').empty();
     // reset all optional fields
     sandbox.resetOptionalFields();
     // reset all other fields
