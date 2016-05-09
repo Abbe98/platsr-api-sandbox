@@ -298,6 +298,7 @@ sandbox = {
         } else {
           sandbox.resetOptionalFields();
           $('#bboxField').show();
+          $('#extractField').show();
         }
       } else {
         sandbox.resetOptionalFields();
