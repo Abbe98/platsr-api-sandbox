@@ -156,6 +156,8 @@ sandbox = {
         result = result.replace(/>/g, '&gt;');
 
         $('#resultContainer').text(result);
+        hljs.initHighlighting.called = false;
+        hljs.initHighlighting();
       },
       error: function() {
         $('.alert').show();
