@@ -199,9 +199,7 @@ var sandbox = {
       $('#lradiusField').show();
       $('#archiveObjectUrlSet').show();
 
-    } else if (method == 'copyright') {
-      //do nothing.
-    } else {
+    } else if (method != 'copyright') {
       $('#userIdSet').show();
     }
   },
