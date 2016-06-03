@@ -7,7 +7,7 @@ var sandbox = {
   mapMode: undefined,
   activeMethod: undefined,
 
-  platsrEndpoint: 'http://localhost:10080/platsr/api/v1/', // CORS enabled proxy
+  platsrEndpoint: 'http://gae-proxy-platsr.appspot.com/platsr/api/v1/', // CORS enabled proxy
   dummyUrlPlaceholder: 'http://www.platsr.se/platsr/api/v1/',
 
   setExtractParameter: function() {
