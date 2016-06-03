@@ -6,6 +6,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var useref = require('gulp-useref');
 var unCSS = require('gulp-uncss');
 
+var ghPages = require('gulp-gh-pages');
+
 gulp.task('default', function() {
   return gulp.src('src/*.html')
     .pipe(useref())
@@ -16,4 +18,9 @@ gulp.task('default', function() {
     .pipe(gulpIf('*.css', autoprefixer()))
     .pipe(gulpIf('*.css', cleanCSS()))
     .pipe(gulp.dest('dist'))
+});
+
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages({remoteUrl: 'git@github.com/Abbe98/platsr-api-sandbox.git'}));
 });
