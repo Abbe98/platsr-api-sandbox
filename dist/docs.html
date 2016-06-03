@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Platsr API Documentation</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/main.min.css">
+	</head>
+	<body>
+		<div class="fluid-container">
+			<div class="row" style="padding-bottom: 12px; margin: auto;">
+				<header class="col-md-12 navbar navbar-light" style="background-color: #D65128; border-radius: 0;"><h1 class="navbar-brand" style="color: #fff;">Platsr API Documentation</h1></header>
+			</div>
+			<div class="col-md-9">
+				<section id="Introduction">
+					<h2>Introduction</h2>
+					<p>The Platsr API gives you as a developer access to tons of local history data all witch is available under open licenses. <a href="https://www.platsr.se">Platsr.se</a> and its services is provided by the <a href="https://www.raa.se/">Swedish National Heritage Board</a>, this documentation and tool is developed and maintained by volunteers and should not be #TODO with the Swedish National Heritage Board.</p>
+					<p>The Platsr API implements a <code>GET</code> REST-like interface with JSON responses except for the Archive Object methods in witch the API returns RDF responses.</p>
+					<p>The following documentation provides documentation for all methods available. It do not and do not aim to cover the JSON response format, for exploring it an <a href="index.html">API sandbox</a> is provided.</p>
+				</section>
+				<section id="ArchiveObject">
+					<h2>Archive Object</h2>
+					<p></p>
+				</section>
+				<section id="Bookmark">
+					<h2>Bookmark</h2>
+					<p></p>
+				</section>
+				<section id="Collection">
+					<h2>Collection</h2>
+					<p></p>
+				</section>
+				<section id="Comment">
+					<h2>Comment</h2>
+					<p></p>
+				</section>
+				<section id="Copyright">
+					<h2>Copyright</h2>
+					<p></p>
+				</section>
+				<section id="Image">
+					<h2>Image</h2>
+					<p></p>
+				</section>
+				<section id="Place">
+					<h2>Place</h2>
+					<p></p>
+				</section>
+				<section id="Recommendation">
+					<h2>Recommendation</h2>
+					<p></p>
+				</section>
+				<section id="Sound">
+					<h2>Sound</h2>
+					<p></p>
+				</section>
+				<section id="Story">
+					<h2>Story</h2>
+					<p></p>
+				</section>
+				<section id="Tag">
+					<h2>Tag</h2>
+					<p></p>
+				</section>
+				<section id="User">
+					<h2>User</h2>
+					<p></p>
+				</section>
+				<section id="Video">
+					<h2>Video</h2>
+					<p></p>
+				</section>
+				<section id="WebAddress">
+					<h2>Web Address</h2>
+					<p></p>
+				</section>
+			</div>
+			<ul class="col-md-3 nav nav-pills nav-stacked">
+				<li class="nav-item">
+					<a class="nav-link" href="#Introduction">Introduction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#ArchiveObject">Archive Object</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Bookmark">Bookmark</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Collection">Collection</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Comment">Comment</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Copyright">Copyright</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Image">Image</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Place">Place</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Recommendation">Recommendation</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Sound">Sound</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Story">Story</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Tag">Tag</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#User">User</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Video">Video</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#WebAddress">Web Address</a>
+				</li>
+			</ul>
+			<div class="col-md-9">
+				<footer>
+					<nav class="nav nav-inline">
+						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
+						<a class="nav-link" href="docs.html">API Docs</a>
+						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
+					</nav>
+				</footer>
+
+				<div class="modal" id="about" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2>About</h2>
+								<span>Sandbox for the Platsr API.</span>
+							</div>
+
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="row">
+
+										<div class="col-md-6">
+											<h3>Libraries</h3>
+											<ul>
+												<li><a href="http://getbootstrap.com/">Bootstrap</a> - <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://leafletjs.com/">Leaflet</a> - <a href="https://github.com/Leaflet/Leaflet/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://proj4js.org/">Proj4JS</a> - <a href="https://github.com/proj4js/proj4js/blob/master/LICENSE.md">MIT</a></li>
+												<li><a href="https://github.com/heyman/leaflet-areaselect">Leaflet AreaSelect</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="https://github.com/Abbe98/proxy-gae">proxy-gae</a></li>
+											</ul>
+										</div>
+										<div class="col-md-6">
+											<h3>Services</h3>
+											<ul>
+												<li><a href="http://www.platsr.nu/platsrs-api/">Platsr API</a></li>
+												<li><a href="https://github.com/">Github</a> - Hosting</li>
+												<li><a href="https://cloud.google.com/appengine/">Google App Engine</a> - Backend hosting</li>
+												<li><a href="http://openstreetmap.se/tjanster">OpenStreetMap Sverige</a> - Map tiles</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="text-align: left;">
+								Developed by <a href="http://abbe98.github.io/" class="abbe">Albin Larsson</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<script src="js/main.min.js"></script>
+	</body>
+</html>

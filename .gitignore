@@ -10,7 +10,6 @@ __pycache__/
 env/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 lib/
@@ -99,3 +98,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Node & Gulp
+
+node_modules/

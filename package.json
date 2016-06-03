@@ -1,0 +1,29 @@
+{
+  "name": "platsr-api-sandbox",
+  "version": "0.1.0",
+  "description": "API sandbox and documentation for the Platsr.se API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abbe98/platsr-api-sandbox.git"
+  },
+  "author": "Albin Larsson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Abbe98/platsr-api-sandbox/issues"
+  },
+  "homepage": "https://github.com/Abbe98/platsr-api-sandbox#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.9",
+    "gulp-if": "^2.0.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^1.5.3",
+    "gulp-uncss": "^1.0.5",
+    "gulp-useref": "^3.1.0"
+  }
+}

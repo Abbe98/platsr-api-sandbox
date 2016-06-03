@@ -1,4 +1,4 @@
-sandbox = {
+var sandbox = {
   sweref99: '+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
   epsg4326: '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs',
   map: null,
