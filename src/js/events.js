@@ -37,7 +37,6 @@ $('#dradiusForm').on('input', function() {
 
 $('#orderByModifiedField').click(function() {
   sandbox.setOrderByParameter();
-  sandbox.displayRelevantFields();
 });
 
 $('#sortDescField').click(function() {

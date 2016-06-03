@@ -282,6 +282,9 @@ var sandbox = {
             if ($('#archiveObjectUrlField').val() == '' && $('#userIdField').val() == '') {
               sandbox.init(sandbox.activeMethod);
             } else {
+              if (sandbox.activeMethod == 'place') {
+                $('#extractField').show();
+              }
               sandbox.resetOptionalFields();
               $('#optionalGroup').show();
               if ($('#archiveObjectUrlField').val() !== '') {
