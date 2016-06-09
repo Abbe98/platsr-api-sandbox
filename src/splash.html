@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Platsr Data</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/main.min.css">
+	</head>
+	<body>
+		<div aria-hidden="true" id="bigFatMap">
+		</div>
+		<div class="overBigFatMap">
+			<header>
+				<h1>Platsr<br>
+					<small><span id="dataUsers"></span> Users</small><br>
+					<small><span id="dataPlaces"></span> Places</small>
+				</h1>
+			</header>
+			<nav>
+				<a href="index.html" class="btn btn-primary btn-lg">Sandbox</a><a href="docs.html" class="btn btn-primary btn-lg">API Docs</a>
+			</nav>
+		</div>
+
+		<script src="js/main.min.js"></script>
+		<script src="js/app.min.js"></script>
+		<script>
+		  splashMap = L.map('bigFatMap', {zoomControl: false}).setView([63, 17], 5);
+		  L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors & <a href="http://openstreetmap.se/">OpenStreetMap Sverige</a>',
+		    subdomains: 'abc'
+		  }).addTo(splashMap);
+
+		  $.ajax({
+		    url: 'http://gae-proxy-platsr.appspot.com/',
+		    dataType: 'text',
+		    success: function(result) {
+		      var usersRe = /\d+(?=<\/b>)/;
+		      var placesRe = /\d+(?= platser och samlingar)/;
+
+		      $('#dataUsers').text(result.match(usersRe)[0]);
+		      $('#dataPlaces').text(result.match(placesRe)[0]);
+		    },
+		    error: function() {
+		      console.log('Proxy error');
+		    }
+		  });
+		</script>
+	</body>
+</html>
