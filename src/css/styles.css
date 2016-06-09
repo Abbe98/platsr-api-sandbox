@@ -1,6 +1,13 @@
 .btn-primary,
 .btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active.focus,
+.btn-primary.active:focus,
+.btn-primary.active:hover,
+.btn-primary:active.focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover {
   background-color: #D65128;
   border-color: #D65128;
 }
@@ -9,6 +16,20 @@ a,
 a:hover,
 a:focus {
   color: #D65128;
+}
+
+.outer-header {
+  padding-bottom: 12px;
+  margin: auto;
+}
+
+.outer-header header {
+  background-color: #D65128;
+  border-radius: 0;
+}
+
+.outer-header header h1.navbar-brand {
+  color: #FFF;
 }
 
 .nav-link.active,
@@ -28,6 +49,22 @@ a:focus {
   right: 7px;
   top: 7px;
   z-index: 3;
+}
+
+#leaflet {
+  width: 100%;
+  height: 450px;
+}
+
+#bboxSubmitBtn {
+  position: fixed;
+  right: 5px;
+  bottom: 22px;
+  display:none;
+}
+
+.about-footer {
+  text-align: left;
 }
 
 .abbe {
