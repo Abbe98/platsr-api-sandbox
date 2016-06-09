@@ -21,7 +21,7 @@ Now after making your changes you can build the application using the following 
 ## Deploy
 Make sure you have push request to this Github repository and that all changes are committed and built. Then run:
 
-´gulp deploy´
+`gulp deploy`
 
 ## License
 
