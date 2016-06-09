@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Platsr API Documentation</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/main.min.css">
+	</head>
+	<body>
+		<a href="#methodMenu" class="skip">Skip to method menu.</a>
+		<div class="fluid-container">
+			<div class="row outer-header">
+				<header class="col-md-12 navbar navbar-light"><h1 class="navbar-brand">Platsr API Documentation</h1></header>
+			</div>
+			<div class="col-md-9">
+				<section id="Introduction">
+					<h2>Introduction</h2>
+					<p>The Platsr API gives you as a developer access to tons of local history data all witch is available under open licenses. <a href="https://www.platsr.se">Platsr.se</a> and its services is provided by the <a href="https://www.raa.se/">Swedish National Heritage Board</a>, this documentation and tool is developed and maintained by volunteers and should not be associated with the Swedish National Heritage Board.</p>
+					<p>The Platsr API implements a <code>GET</code> based REST-like interface with JSON responses.</p>
+					<p>The following documentation provides documentation for all methods available. It do not and do not aim to cover the JSON response format, for exploring it an <a href="sandbox.html">API sandbox</a> is provided.</p>
+				</section>
+				<section id="ArchiveObject">
+					<h2>Archive Object</h2>
+					<p><code>archiveObject</code> allows you to return a archive item based on it's URI. This method also allows a response based on an user ID that returns archive objects linked within Platsr by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code>|<code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code>|<code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/platsr/api/v1/archiveObject/51000000016280</code></li>
+						<li><code>http://www.platsr.se/platsr/api/v1/archiveObject?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Bookmark">
+					<h2>Bookmark</h2>
+					<p><code>bookmark</code> allows you to return an user created bookmark. This method also allows a response based on an user ID that returns bookmarks by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code>|<code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code>|<code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/bookmark/51000000002060</code></li>
+						<li><code>http://www.platsr.se/platsr/api/v1/bookmark?userId=Admin</code></li>
+					</ul>
+				</section>
+				<section id="Collection">
+					<h2>Collection</h2>
+					<p><code>collection</code> allows you to return an user created collection. This method also allows a response based on an user ID that returns collections by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code>|<code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code>|<code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/collection/51000000058701</code></li>
+						<li><code>http://www.platsr.se/platsr/api/v1/collection?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Comment">
+					<h2>Comment</h2>
+					<p><code>comment</code> allows you to return a comment. This method also allows a response based on an user ID that can return multiply comments by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code>|<code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code>|<code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/comment/51000000061380</code></li>
+						<li><code>http://www.platsr.se/api/v1/comment?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Copyright">
+					<h2>Copyright</h2>
+					<p><code>copyright</code> allows you to copyright description by its ID.</p>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/copyright/511000</code></li>
+					</ul>
+				</section>
+				<section id="Image">
+					<h2>Image</h2>
+					<p><code>image</code> allows you to return information about an image. This method also allows a response based on an user ID that can return multiply images uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/image/51000000060560</code></li>
+						<li><code>http://www.platsr.se/api/v1/image?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Place">
+					<h2>Place</h2>
+					<p><code>place</code> allows you to retrieve a single place or a list of places. The <code>place</code> method has six incompatible parameters for returning lists and each parameter has multiply optional or required parameters.</p>
+					<ul>
+						<li><code>bbox</code> requires SWEREF 99 TM coordinates in a comma separated list: <code>{left},{bottom},{right},{top}</code>
+							<ul>
+								<li><code>extracted</code> optional parameter for including all data about a place within the list.</li>
+							</ul>
+						</li>
+						<li>point used to return all places within a specific range from a location(format: <code>{x},{y}</code>).
+							<ul>
+								<li><code>radius</code> optional parameter(int), specifies the radius around the specified point(in meters).</li>
+								<li><code>extracted</code> optional parameter</li>
+							</ul>
+						</li>
+						<li><code>userId</code> return a list of places created by an specific user.
+							<ul>
+								<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+								<li><code>sort</code> optional, supported values: <code>decs</code> | <code>asc</code>(default)</li>
+								<li><code>limit</code> optional, any positive integer</li>
+								<li><code>extracted</code> optional, optional parameter</li>
+							</ul>
+						</li>
+						<li><code>archiveObjectUrl</code> used to retrieve a list of places witch has a specific SOCH archive linked. SOCH URI:s is the only valid value, not Platsr:s archive objects IDs.
+							<ul>
+								<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+								<li><code>sort</code> optional, supported values: <code>decs</code> | <code>asc</code>(default)</li>
+								<li><code>limit</code> optional, any positive integer</li>
+								<li><code>extracted</code> optional, optional parameter</li>
+							</ul>
+						</li>
+							<li><code>text</code> used to retrieve a list of places witch contains a specific string.
+							<ul>
+								<li><code>extracted</code> optional, optional parameter</li>
+							</ul>
+						</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/platsr/api/v1/place?bbox=619243%2C6518456%2C612326%2C6510471</code></li>
+						<li><code>http://www.platsr.se/platsr/api/v1/place?point=616194%2C6514159&radius=10000</code></li>
+						<li><code>http://www.platsr.se/platsr/api/v1/place?userId=Albin+Larsson</code></li>
+						<li><code>http://www.platsr.se/platsr/api/v1/place?archiveObjectUrl=raa/fmi/10090500420002&sortBy=desc</code></li>
+						<li><code>http://www.platsr.se/platsr/api/v1/place?text=Katrineholm&extracted=true</code></li>
+					</ul>
+				</section>
+				<section id="Recommendation">
+					<h2>Recommendation</h2>
+					<p><code>recomendation</code> allows you to return a recommendation. This method also allows a response based on an user ID that can return multiply recommendations made by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<p><strong>NOTE:</strong> <code>recomendation</code> is the valid parameter name not <code>recommendation</code>.</p>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/platsr/api/v1/recomendation/51000000077244</code></li>
+						<li><code>http://www.platsr.se/api/v1/recomendation?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Sound">
+					<h2>Sound</h2>
+					<p><code>sound</code> allows you to return information about an uploaded or linked sound. This method also allows a response based on an user ID that can return multiply sounds uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/platsr/api/v1/sound/51000000064221</code></li>
+						<li><code>http://www.platsr.se/api/v1/sound?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Story">
+					<h2>Story</h2>
+					<p><code>story</code> allows you to return a story. This method also allows a response based on an user ID that can return multiply stories made by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<p><strong>NOTE:</strong> <code>recomendation</code> is the valid parameter name not <code>recommendation</code>.</p>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/story/51000000058826</code></li>
+						<li><code>http://www.platsr.se/api/v1/story?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Tag">
+					<h2>Tag</h2>
+					<p><code>tag</code> allows you to return a tag. This method also allows a response based on an user ID that can return multiply tags used by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<p><strong>NOTE:</strong> <code>recomendation</code> is the valid parameter name not <code>recommendation</code>.</p>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/tag/51000000058820</code></li>
+						<li><code>http://www.platsr.se/api/v1/tag?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="User">
+					<h2>User</h2>
+					<p><code>user</code> allows you retrieve information about an specific user.</p>
+					<p><strong>NOTE:</strong> The user ID is not a integer as for other Platsr items.</p>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/user/Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="Video">
+					<h2>Video</h2>
+					<p><code>video</code> allows you to return information about an uploaded or linked video. This method also allows a response based on an user ID that can return multiply sounds uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/platsr/api/v1/video/51000000017040</code></li>
+						<li><code>http://www.platsr.se/api/v1/video?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+				<section id="WebAddress">
+					<h2>Web Address</h2>
+					<p><code>webAddress</code> allows you to return information about an linked web address. This method also allows a response based on an user ID that can return information about multiply web addresses by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
+					<ul>
+						<li><code>orderBy</code> supported values: <code>modified</code> | <code>created</code>(default)</li>
+						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
+						<li><code>limit</code> any positive integer</li>
+					</ul>
+					<h3>Examples</h3>
+					<ul>
+						<li><code>http://www.platsr.se/api/v1/webAdress/51000000016301</code></li>
+						<li><code>http://www.platsr.se/api/v1/webAddress?userId=Albin+Larsson</code></li>
+					</ul>
+				</section>
+			</div>
+			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
+				<li class="nav-item">
+					<a class="nav-link" href="#Introduction">Introduction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#ArchiveObject">Archive Object</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Bookmark">Bookmark</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Collection">Collection</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Comment">Comment</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Copyright">Copyright</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Image">Image</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Place">Place</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Recommendation">Recommendation</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Sound">Sound</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Story">Story</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Tag">Tag</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#User">User</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#Video">Video</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#WebAddress">Web Address</a>
+				</li>
+			</ul>
+			<div class="col-md-9">
+
+				<div class="modal" id="about" tabindex="-1" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2>About</h2>
+								<span>Sandbox for the Platsr API.</span>
+							</div>
+
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="row">
+
+										<div class="col-md-6">
+											<h3>Libraries</h3>
+											<ul>
+												<li><a href="http://getbootstrap.com/">Bootstrap</a> - <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://jquery.com/">jQuery</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="http://leafletjs.com/">Leaflet</a> - <a href="https://github.com/Leaflet/Leaflet/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://proj4js.org/">Proj4JS</a> - <a href="https://github.com/proj4js/proj4js/blob/master/LICENSE.md">MIT</a></li>
+												<li><a href="https://github.com/heyman/leaflet-areaselect">Leaflet AreaSelect</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="http://medialize.github.io/URI.js/">URI.js</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="https://highlightjs.org/">highlight.js</a> - <a href="https://github.com/isagalaev/highlight.js/blob/master/LICENSE">BSD</a></li>
+												<li><a href="https://github.com/Abbe98/proxy-gae">proxy-gae</a></li>
+											</ul>
+										</div>
+										<div class="col-md-6">
+											<h3>Services</h3>
+											<ul>
+												<li><a href="http://www.platsr.nu/platsrs-api/">Platsr API</a></li>
+												<li><a href="https://github.com/">Github</a> - Hosting</li>
+												<li><a href="https://cloud.google.com/appengine/">Google App Engine</a> - Backend hosting</li>
+												<li><a href="http://openstreetmap.se/tjanster">OpenStreetMap Sverige</a> - Map tiles</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" class="about-footer">
+								Developed by <a href="http://abbe98.github.io/" class="abbe">Albin Larsson</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<footer>
+					<nav class="nav nav-inline">
+						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
+						<a class="nav-link" href="sandbox.html">API Sandbox</a>
+						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
+					</nav>
+				</footer>
+			</div>
+
+		<script src="js/main.min.js"></script>
+	</body>
+</html>
