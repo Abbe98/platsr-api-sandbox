@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="css/main.min.css">
 	</head>
 	<body>
+		<a href="#methodMenu" class="skip">Skip to method menu.</a>
 		<div class="fluid-container">
 			<div class="row outer-header">
 				<header class="col-md-12 navbar navbar-light"><h1 class="navbar-brand">Platsr API Documentation</h1></header>
@@ -240,7 +241,7 @@
 					</ul>
 				</section>
 			</div>
-			<ul class="col-md-3 nav nav-pills nav-stacked">
+			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
 				<li class="nav-item">
 					<a class="nav-link" href="#Introduction">Introduction</a>
 				</li>
@@ -288,15 +289,8 @@
 				</li>
 			</ul>
 			<div class="col-md-9">
-				<footer>
-					<nav class="nav nav-inline">
-						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
-						<a class="nav-link" href="sandbox.html">API Sandbox</a>
-						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
-					</nav>
-				</footer>
 
-				<div class="modal" id="about" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal" id="about" tabindex="-1" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -336,6 +330,14 @@
 						</div>
 					</div>
 				</div>
+
+				<footer>
+					<nav class="nav nav-inline">
+						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
+						<a class="nav-link" href="sandbox.html">API Sandbox</a>
+						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
+					</nav>
+				</footer>
 			</div>
 
 		<script src="js/main.min.js"></script>
