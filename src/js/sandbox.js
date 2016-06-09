@@ -158,6 +158,7 @@ var sandbox = {
         $('#resultContainer').text(result);
         hljs.initHighlighting.called = false;
         hljs.initHighlighting();
+        $('#resultContainer').focus();
       },
       error: function() {
         $('.alert').show();
