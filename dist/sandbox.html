@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Platsr API Sandbox</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/main.min.css">
+	</head>
+	<body>
+		<div class="fluid-container">
+			<div class="row" style="padding-bottom: 12px; margin: auto;">
+				<header class="col-md-12 navbar navbar-light" style="background-color: #D65128; border-radius: 0;"><h1 class="navbar-brand" style="color: #fff;">Platsr API Sandbox</h1></header>
+			</div>
+			<div class="col-md-9">
+				<form>
+					<fieldset class="form-group">
+						<label for="requestUrlForm">Request URL</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="requestUrlForm" disabled value="http://www.platsr.se/platsr/api/v1/">
+							<span class="input-group-btn">
+								<button class="btn btn-secondary" id="copy" type="button">Copy</button>
+							</span>
+						</div>
+					</fieldset>
+
+					<div id="fieldContainer">
+
+						<fieldset class="form-group" style="display: none;" id="uriField">
+							<label for="uriForm">Item URI</label>
+							<input type="text" class="form-control" id="uriForm" placeholder="50000000000001">
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="searchField">
+							<label for="searchForm">Search Text</label>
+							<input type="text" class="form-control" id="searchForm" placeholder="Katrineholm">
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="bboxField">
+							<label for="bboxForm">Bounding Box</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="bboxForm" placeholder="751050,6635000,758242,6429670">
+								<span class="input-group-btn">
+									<button class="btn btn-secondary" type="button" id="bboxMapBtn" data-toggle="modal" data-target="#modal">Map</button>
+								</span>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="lradiusField">
+							<label for="lradiusForm">Center Location</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="lradiusForm" placeholder="519412,6468281">
+								<span class="input-group-btn">
+									<button class="btn btn-secondary" type="button" id="pointMapBtn" data-toggle="modal" data-target="#modal">Map</button>
+								</span>
+							</div>
+							<label for="dradiusForm">Radius</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dradiusForm" placeholder="1000">
+								<div class="input-group-addon">meters</div>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="userIdSet">
+							<label for="userIdField">User ID</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="userIdField" placeholder="Albin+Larsson"></input>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="archiveObjectUrlSet">
+							<label for="archiveObjectUrlField">Archive Object</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="archiveObjectUrlField" placeholder="raa/fmi/10090500420002"></input>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="optionalGroup">
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="orderByModifiedField">
+								<span class="c-indicator"></span>
+								Order by last time modified.
+							</label><br>
+
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="sortDescField">
+								<span class="c-indicator"></span>
+								Sort in descending order.
+							</label><br>
+
+								<label for="limitField">Limit</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="limitField" placeholder="50"></input>
+								</div>
+						</fieldset>
+
+						<fieldset style="display: none;" id="extractField">
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="extract">
+								<span class="c-indicator"></span>
+								Extract Items
+							</label>
+						</fieldset>
+					</div>
+
+					<button type="button" class="btn btn-primary" onclick="sandbox.platsrRequest()">Run</button>
+
+					<div class="modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-body" id="leaflet" style="width: 100%; height: 450px;"></div>
+								<button type="button" class="btn btn-primary" id="bboxSubmitBtn" style="position: fixed; right: 5px; bottom: 22px; display:none;">OK</button>
+							</div>
+						</div>
+					</div>
+				</form>
+
+				<div class="alert alert-warning alert-dismissible" role="alert" style="display: none">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<strong>Request Error</strong> Platsr didn't like that request.
+				</div>
+
+				<pre><code id="resultContainer" class="json"></code></pre>
+
+				<footer>
+					<nav class="nav nav-inline">
+						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
+						<a class="nav-link" href="docs.html">API Docs</a>
+						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
+					</nav>
+				</footer>
+
+				<div class="modal" id="about" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2>About</h2>
+								<span>Sandbox for the Platsr API.</span>
+							</div>
+
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="row">
+
+										<div class="col-md-6">
+											<h3>Libraries</h3>
+											<ul>
+												<li><a href="http://getbootstrap.com/">Bootstrap</a> - <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://leafletjs.com/">Leaflet</a> - <a href="https://github.com/Leaflet/Leaflet/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://proj4js.org/">Proj4JS</a> - <a href="https://github.com/proj4js/proj4js/blob/master/LICENSE.md">MIT</a></li>
+												<li><a href="https://github.com/heyman/leaflet-areaselect">Leaflet AreaSelect</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="https://github.com/Abbe98/proxy-gae">proxy-gae</a></li>
+											</ul>
+										</div>
+										<div class="col-md-6">
+											<h3>Services</h3>
+											<ul>
+												<li><a href="http://www.platsr.nu/platsrs-api/">Platsr API</a></li>
+												<li><a href="https://github.com/">Github</a> - Hosting</li>
+												<li><a href="https://cloud.google.com/appengine/">Google App Engine</a> - Backend hosting</li>
+												<li><a href="http://openstreetmap.se/tjanster">OpenStreetMap Sverige</a> - Map tiles</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="text-align: left;">
+								Developed by <a href="http://abbe98.github.io/" class="abbe">Albin Larsson</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<ul class="col-md-3 nav nav-pills nav-stacked">
+				<li role="button" class="nav-link" onclick="sandbox.init('archiveObject'); $(this).addClass('active')">Archive Object</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('bookmark'); $(this).addClass('active')">Bookmark</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('collection'); $(this).addClass('active')">Collection</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('comment'); $(this).addClass('active')">Comment</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('copyright'); $(this).addClass('active')">Copyright</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('image'); $(this).addClass('active')">Image</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('place'); $(this).addClass('active')" id="initBtn">Place</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('recomendation'); $(this).addClass('active')">Recommendation</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('sound'); $(this).addClass('active')">Sound</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('story'); $(this).addClass('active')">Story</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('tag'); $(this).addClass('active')">Tag</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('user'); $(this).addClass('active')">User</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('video'); $(this).addClass('active')">Video</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('webAdress'); $(this).addClass('active')">Web Address</li>
+			</ul>
+		</div>
+
+		<div class="alert-container"></div>
+
+		<script src="js/main.min.js"></script>
+		<script src="js/app.min.js"></script>
+
+		<link rel="stylesheet" href="css/secondary.min.css">
+		<script>
+		  sandbox.init('place'); $('#initBtn').addClass('active');
+		</script>
+	</body>
+</html>
