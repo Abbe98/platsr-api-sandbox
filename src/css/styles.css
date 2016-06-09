@@ -37,7 +37,8 @@ a.skip {
   border-radius: 0;
 }
 
-.outer-header header h1.navbar-brand {
+.outer-header header h1.navbar-brand,
+.outer-header header h1.navbar-brand:hover {
   color: #FFF;
 }
 
@@ -45,6 +46,20 @@ a.skip {
 .nav-link.active:hover,
 .nav-link.active:focus {
   background-color: #D65128 !important;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.input-group *,
+input[type=text] {
+  border-radius: 0;
+}
+
+.form-control:focus {
+  border-color: #D65128;
+  outline: 0;
 }
 
 .c-input > input:checked ~ .c-indicator {
