@@ -20,7 +20,7 @@
 					<p>The Platsr API implements a <code>GET</code> based REST-like interface with JSON responses.</p>
 					<p>The following documentation provides documentation for all methods available. It do not and do not aim to cover the JSON response format, for exploring it an <a href="sandbox.html">API sandbox</a> is provided.</p>
 				</section>
-				<section id="ArchiveObject">
+				<section id="archiveObject">
 					<h2>Archive Object</h2>
 					<p><code>archiveObject</code> allows you to return a archive item based on it's URI. This method also allows a response based on an user ID that returns archive objects linked within Platsr by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -34,7 +34,7 @@
 						<li><code>http://www.platsr.se/platsr/api/v1/archiveObject?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Bookmark">
+				<section id="bookmark">
 					<h2>Bookmark</h2>
 					<p><code>bookmark</code> allows you to return an user created bookmark. This method also allows a response based on an user ID that returns bookmarks by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -48,7 +48,7 @@
 						<li><code>http://www.platsr.se/platsr/api/v1/bookmark?userId=Admin</code></li>
 					</ul>
 				</section>
-				<section id="Collection">
+				<section id="collection">
 					<h2>Collection</h2>
 					<p><code>collection</code> allows you to return an user created collection. This method also allows a response based on an user ID that returns collections by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -62,7 +62,7 @@
 						<li><code>http://www.platsr.se/platsr/api/v1/collection?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Comment">
+				<section id="comment">
 					<h2>Comment</h2>
 					<p><code>comment</code> allows you to return a comment. This method also allows a response based on an user ID that can return multiply comments by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -76,7 +76,7 @@
 						<li><code>http://www.platsr.se/api/v1/comment?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Copyright">
+				<section id="copyright">
 					<h2>Copyright</h2>
 					<p><code>copyright</code> allows you to copyright description by its ID.</p>
 					<h3>Examples</h3>
@@ -84,7 +84,7 @@
 						<li><code>http://www.platsr.se/api/v1/copyright/511000</code></li>
 					</ul>
 				</section>
-				<section id="Image">
+				<section id="image">
 					<h2>Image</h2>
 					<p><code>image</code> allows you to return information about an image. This method also allows a response based on an user ID that can return multiply images uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -98,7 +98,7 @@
 						<li><code>http://www.platsr.se/api/v1/image?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Place">
+				<section id="place">
 					<h2>Place</h2>
 					<p><code>place</code> allows you to retrieve a single place or a list of places. The <code>place</code> method has six incompatible parameters for returning lists and each parameter has multiply optional or required parameters.</p>
 					<ul>
@@ -144,7 +144,7 @@
 						<li><code>http://www.platsr.se/platsr/api/v1/place?text=Katrineholm&extracted=true</code></li>
 					</ul>
 				</section>
-				<section id="Recommendation">
+				<section id="recomendation">
 					<h2>Recommendation</h2>
 					<p><code>recomendation</code> allows you to return a recommendation. This method also allows a response based on an user ID that can return multiply recommendations made by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -159,7 +159,7 @@
 						<li><code>http://www.platsr.se/api/v1/recomendation?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Sound">
+				<section id="sound">
 					<h2>Sound</h2>
 					<p><code>sound</code> allows you to return information about an uploaded or linked sound. This method also allows a response based on an user ID that can return multiply sounds uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -173,7 +173,7 @@
 						<li><code>http://www.platsr.se/api/v1/sound?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Story">
+				<section id="story">
 					<h2>Story</h2>
 					<p><code>story</code> allows you to return a story. This method also allows a response based on an user ID that can return multiply stories made by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -188,7 +188,7 @@
 						<li><code>http://www.platsr.se/api/v1/story?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Tag">
+				<section id="tag">
 					<h2>Tag</h2>
 					<p><code>tag</code> allows you to return a tag. This method also allows a response based on an user ID that can return multiply tags used by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -203,7 +203,7 @@
 						<li><code>http://www.platsr.se/api/v1/tag?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="User">
+				<section id="user">
 					<h2>User</h2>
 					<p><code>user</code> allows you retrieve information about an specific user.</p>
 					<p><strong>NOTE:</strong> The user ID is not a integer as for other Platsr items.</p>
@@ -212,7 +212,7 @@
 						<li><code>http://www.platsr.se/api/v1/user/Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="Video">
+				<section id="video">
 					<h2>Video</h2>
 					<p><code>video</code> allows you to return information about an uploaded or linked video. This method also allows a response based on an user ID that can return multiply sounds uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -226,7 +226,7 @@
 						<li><code>http://www.platsr.se/api/v1/video?userId=Albin+Larsson</code></li>
 					</ul>
 				</section>
-				<section id="WebAddress">
+				<section id="webAddress">
 					<h2>Web Address</h2>
 					<p><code>webAddress</code> allows you to return information about an linked web address. This method also allows a response based on an user ID that can return information about multiply web addresses by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -246,46 +246,46 @@
 					<a class="nav-link" href="#Introduction">Introduction</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#ArchiveObject">Archive Object</a>
+					<a class="nav-link" href="#archiveObject">Archive Object</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Bookmark">Bookmark</a>
+					<a class="nav-link" href="#bookmark">Bookmark</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Collection">Collection</a>
+					<a class="nav-link" href="#collection">Collection</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Comment">Comment</a>
+					<a class="nav-link" href="#comment">Comment</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Copyright">Copyright</a>
+					<a class="nav-link" href="#copyright">Copyright</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Image">Image</a>
+					<a class="nav-link" href="#image">Image</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Place">Place</a>
+					<a class="nav-link" href="#place">Place</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Recommendation">Recommendation</a>
+					<a class="nav-link" href="#recomendation">Recommendation</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Sound">Sound</a>
+					<a class="nav-link" href="#sound">Sound</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Story">Story</a>
+					<a class="nav-link" href="#story">Story</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Tag">Tag</a>
+					<a class="nav-link" href="#tag">Tag</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#User">User</a>
+					<a class="nav-link" href="#user">User</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#Video">Video</a>
+					<a class="nav-link" href="#video">Video</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#WebAddress">Web Address</a>
+					<a class="nav-link" href="#webAddress">Web Address</a>
 				</li>
 			</ul>
 			<div class="col-md-9">
