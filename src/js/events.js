@@ -8,6 +8,10 @@ $('#userIdField').on('input', function() {
   sandbox.displayRelevantFields();
 });
 
+$('#limitField').on('input', function() {
+  sandbox.setLimitParameter();
+});
+
 $('#archiveObjectUrlField').on('input', function() {
   sandbox.setArchiveObjectUrlParameter();
   sandbox.displayRelevantFields();

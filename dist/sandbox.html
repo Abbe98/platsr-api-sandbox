@@ -205,7 +205,11 @@
 
 		<link rel="stylesheet" href="css/secondary.min.css">
 		<script>
-		  sandbox.init('place'); $('#initBtn').addClass('active');
+		  if (!sandbox.getUrlParameter('method')) {
+		    sandbox.init('place'); $('#initBtn').addClass('active');
+		  } else {
+		    sandbox.init(sandbox.getUrlParameter('method'));
+		  }
 		</script>
 	</body>
 </html>

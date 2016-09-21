@@ -6,6 +6,7 @@ var sandbox = {
   areaSelect: null,
   mapMode: undefined,
   activeMethod: undefined,
+  initized: false,
 
   platsrEndpoint: 'http://gae-proxy-platsr.appspot.com/platsr/api/v1/', // CORS enabled proxy
   dummyUrlPlaceholder: 'http://www.platsr.se/platsr/api/v1/',
@@ -171,21 +172,57 @@ var sandbox = {
     $('#resultContainer').empty();
     // reset all optional fields
     sandbox.resetOptionalFields();
+
     // reset all other fields
-    $('#uriForm').val('');
-    $('#searchForm').val('');
-    $('#bboxForm').val('');
-    $('#lradiusForm').val('');
-    $('#dradiusForm').val('');
-    $('#archiveObjectUrlField').val('');
-    $('#userIdField').val('');
+    if (!sandbox.getUrlParameter('uri')) {
+      $('#uriForm').val('');
+    } else if (!sandbox.initized) {
+      $('#uriForm').val(sandbox.getUrlParameter('uri'));
+    }
+
+    if (!sandbox.getUrlParameter('text')) {
+      $('#searchForm').val('');
+    } else if (!sandbox.initized) {
+      $('#searchForm').val(sandbox.getUrlParameter('text'));
+    }
+
+    if (!sandbox.getUrlParameter('bbox')) {
+      $('#bboxForm').val('');
+    } else if (!sandbox.initized) {
+      $('#bboxForm').val(sandbox.getUrlParameter('bbox'));
+    }
+
+    if (!sandbox.getUrlParameter('point')) {
+      $('#lradiusForm').val('');
+    } else if (!sandbox.initized) {
+      $('#lradiusForm').val(sandbox.getUrlParameter('point'));
+    }
+
+    if (!sandbox.getUrlParameter('radius')) {
+      $('#dradiusForm').val('');
+    } else if (!sandbox.initized) {
+      $('#dradiusForm').val(sandbox.getUrlParameter('radius'));
+    }
+
+    if (!sandbox.getUrlParameter('archiveObject')) {
+      $('#archiveObjectUrlField').val('');
+    } else if (!sandbox.initized) {
+      $('#archiveObjectUrlField').val(sandbox.getUrlParameter('archiveObject'));
+    }
+
+    if (!sandbox.getUrlParameter('userId')) {
+      $('#userIdField').val('');
+    } else if (!sandbox.initized) {
+      $('#userIdField').val(sandbox.getUrlParameter('userId'));
+    }
+
     // hide all fields by default
     $('#fieldContainer').children().hide();
     // clear active elements
     $('.active').removeClass('active');
     // update dummy URL
     $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + method);
-    // all methods supports URIs? #TODO
+    // show uri field for all methods
     $('#uriField').show();
     // save method
     sandbox.activeMethod = method;
@@ -194,15 +231,28 @@ var sandbox = {
       $('#extractField').show();
 
       $('#userIdSet').show();
+      sandbox.setUserIdParameter();
 
       $('#searchField').show();
+      sandbox.setTextParameter();
       $('#bboxField').show();
+      sandbox.setBBoxParameter();
       $('#lradiusField').show();
+      sandbox.setPointParameter();
       $('#archiveObjectUrlSet').show();
+      sandbox.setArchiveObjectUrlParameter();
 
     } else if (method != 'copyright' && method != 'user') {
       $('#userIdSet').show();
+      sandbox.setUserIdParameter();
     }
+
+    if (sandbox.getUrlParameter('method') && !sandbox.initized) {
+      sandbox.displayRelevantFields();
+    }
+
+    sandbox.setItemUri();
+    sandbox.initized = true;
   },
 
   createMap: function() {
@@ -316,16 +366,68 @@ var sandbox = {
   },
 
   resetOptionalFields: function() {
-    $('#extract').attr('checked', false);
-    sandbox.setExtractParameter();
+    if (!sandbox.getUrlParameter('extracted')){
+      $('#extract').attr('checked', false);
+      sandbox.setExtractParameter();
+    } else if (!sandbox.initized) {
+     $('#extract').attr('checked', true);
+     sandbox.setExtractParameter();
+    }
 
-    $('#sortDescField').attr('checked', false);
-    sandbox.setSortParameter();
+    if (!sandbox.getUrlParameter('sortBy')) {
+      $('#sortDescField').attr('checked', false);
+      sandbox.setSortParameter();
+    } else if (!sandbox.initized) {
+      $('#sortDescField').attr('checked', true);
+      sandbox.setSortParameter();
+    }
 
-    $('#orderByModifiedField').attr('checked', false);
-    sandbox.setOrderByParameter();
+    if (!sandbox.getUrlParameter('orderBy')) {
+      $('#orderByModifiedField').attr('checked', false);
+      sandbox.setOrderByParameter();
+    } else if (!sandbox.initized) {
+      $('#orderByModifiedField').attr('checked', true);
+      sandbox.setOrderByParameter();
+    }
 
-    $('#limitField').val('');
-    sandbox.setLimitParameter();
+    if (!sandbox.getUrlParameter('limit')) {
+      $('#limitField').val('');
+      sandbox.setLimitParameter();
+    } else if (!sandbox.initized) {
+      $('#limitField').val(sandbox.getUrlParameter('limit'));
+      sandbox.setLimitParameter();
+    }
+
+  },
+
+  getUrlParameter: function(parameter) {
+    var url = window.location.search.substring(1);
+    var vars = url.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] == parameter) {
+        return pair[1];
+      }
+    }
+    return(false);
+  },
+
+  setQueryParameter: function() {
+    var queryValue = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, '');
+    console.log(queryValue)
+    if (queryValue.indexOf('?') >= 0) {
+      queryValue = queryValue.replace('?', '&');
+      window.location.search = '?method=' + queryValue;
+    } else {
+      var pair = queryValue.split('/');
+      if (pair[1] != undefined) {
+        window.location.search = '?method=' + pair[0] + '&uri=' + pair[1];
+      }
+    }
+  },
+
+  getQueryLink: function() {
+    var queryValue = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, '').replace('?', '&');
+    return window.location.pathname + queryValue;
   }
 }

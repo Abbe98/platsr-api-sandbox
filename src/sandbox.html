@@ -223,7 +223,11 @@
 		<link rel="stylesheet" href="libs/highlight.default.css" />
 		<!-- endbuild -->
 		<script>
-		  sandbox.init('place'); $('#initBtn').addClass('active');
+		  if (!sandbox.getUrlParameter('method')) {
+		    sandbox.init('place'); $('#initBtn').addClass('active');
+		  } else {
+		    sandbox.init(sandbox.getUrlParameter('method'));
+		  }
 		</script>
 	</body>
 </html>
