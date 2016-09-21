@@ -17,6 +17,24 @@
 			<div class="row outer-header">
 				<header class="col-md-12 navbar navbar-light"><h1 class="navbar-brand">Platsr API Sandbox</h1></header>
 			</div>
+
+			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
+				<li role="button" class="nav-link" onclick="sandbox.init('archiveObject'); $(this).addClass('active')">Archive Object</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('bookmark'); $(this).addClass('active')">Bookmark</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('collection'); $(this).addClass('active')">Collection</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('comment'); $(this).addClass('active')">Comment</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('copyright'); $(this).addClass('active')">Copyright</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('image'); $(this).addClass('active')">Image</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('place'); $(this).addClass('active')" id="initBtn">Place</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('recomendation'); $(this).addClass('active')">Recommendation</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('sound'); $(this).addClass('active')">Sound</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('story'); $(this).addClass('active')">Story</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('tag'); $(this).addClass('active')">Tag</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('user'); $(this).addClass('active')">User</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('video'); $(this).addClass('active')">Video</li>
+				<li role="button" class="nav-link" onclick="sandbox.init('webAdress'); $(this).addClass('active')">Web Address</li>
+			</ul>
+
 			<div class="col-md-9">
 				<form>
 					<fieldset class="form-group">
@@ -182,22 +200,6 @@
 				</footer>
 			</div>
 
-			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
-				<li role="button" class="nav-link" onclick="sandbox.init('archiveObject'); $(this).addClass('active')">Archive Object</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('bookmark'); $(this).addClass('active')">Bookmark</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('collection'); $(this).addClass('active')">Collection</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('comment'); $(this).addClass('active')">Comment</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('copyright'); $(this).addClass('active')">Copyright</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('image'); $(this).addClass('active')">Image</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('place'); $(this).addClass('active')" id="initBtn">Place</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('recomendation'); $(this).addClass('active')">Recommendation</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('sound'); $(this).addClass('active')">Sound</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('story'); $(this).addClass('active')">Story</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('tag'); $(this).addClass('active')">Tag</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('user'); $(this).addClass('active')">User</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('video'); $(this).addClass('active')">Video</li>
-				<li role="button" class="nav-link" onclick="sandbox.init('webAdress'); $(this).addClass('active')">Web Address</li>
-			</ul>
 		</div>
 
 		<div class="alert-container"></div>
