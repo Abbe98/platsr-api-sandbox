@@ -5,7 +5,11 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="css/main.min.css">
+		<!--build:css css/main.min.css  -->
+		<link rel="stylesheet" href="libs/bootstrap.css">
+		<link rel="stylesheet" href="libs/leaflet.css">
+		<link rel="stylesheet" href="css/styles.css">
+		<!-- endbuild  -->
 	</head>
 	<body>
 		<div aria-hidden="true" id="bigFatMap">
@@ -22,8 +26,20 @@
 			</nav>
 		</div>
 
-		<script src="js/main.min.js"></script>
-		<script src="js/app.min.js"></script>
+		<!--build:js js/main.min.js -->
+		<script src="libs/jquery.min.js"></script>
+		<script src="libs/bootstrap.js"></script>
+		<!-- endbuild -->
+		<!--build:js js/app.min.js -->
+		<script src="libs/leaflet.min.js"></script>
+		<script src="libs/uri.js"></script>
+		<script src="libs/proj4.min.js"></script>
+		<script src="libs/leaflet-areaselect.js"></script>
+		<script src="libs/highlight.js"></script>
+		<script src="js/sandbox.js"></script>
+		<script src="js/events.js"></script>
+		<!-- endbuild -->
+
 		<script>
 		  splashMap = L.map('bigFatMap', {zoomControl: false}).setView([63, 17], 5);
 		  L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
