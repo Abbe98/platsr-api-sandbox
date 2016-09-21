@@ -251,7 +251,14 @@ var sandbox = {
       sandbox.displayRelevantFields();
     }
 
-    sandbox.setItemUri();
+    if (sandbox.getUrlParameter('uri')) {
+      sandbox.setItemUri();
+    }
+
+    if (sandbox.getUrlParameter('run') && sandbox.initized == false) {
+      sandbox.platsrRequest();
+    }
+
     sandbox.initized = true;
   },
 
