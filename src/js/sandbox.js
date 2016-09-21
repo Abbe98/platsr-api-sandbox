@@ -200,7 +200,7 @@ var sandbox = {
       $('#lradiusField').show();
       $('#archiveObjectUrlSet').show();
 
-    } else if (method != 'copyright') {
+    } else if (method != 'copyright' && method != 'user') {
       $('#userIdSet').show();
     }
   },
