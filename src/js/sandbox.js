@@ -204,10 +204,10 @@ var sandbox = {
       $('#dradiusForm').val('');
     }
 
-    if (!sandbox.initized && sandbox.getUrlParameter('archiveObject')) {
-      $('#archiveObjectUrlForm').val(sandbox.getUrlParameter('archiveObject'));
+    if (!sandbox.initized && sandbox.getUrlParameter('archiveObjectUrl')) {
+      $('#archiveObjectUrlField').val(sandbox.getUrlParameter('archiveObjectUrl'));
     } else {
-      $('#archiveObjectUrlForm').val('');
+      $('#archiveObjectUrlField').val('');
     }
 
     if (!sandbox.initized && sandbox.getUrlParameter('userId')) {
