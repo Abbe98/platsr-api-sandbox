@@ -121,6 +121,21 @@
 
 					<button type="button" class="btn btn-primary" onclick="sandbox.platsrRequest()">Run</button>
 
+					<div id="sharebox" style="display: none">
+						<br><a href="#share" data-toggle="collapse" aria-expanded="false">Share query</a>
+						<div class="collapse" id="share">
+							<fieldset id="share" class="card card-block">
+								<label for="shareUrl">Direct URL</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="shareUrl" disabled>
+									<span class="input-group-btn">
+										<button class="btn btn-secondary" id="copyShare" type="button">Copy</button>
+									</span>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+
 					<div class="modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">

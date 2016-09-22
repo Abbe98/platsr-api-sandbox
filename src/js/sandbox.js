@@ -174,6 +174,11 @@ var sandbox = {
             }
           }
         }
+
+        if (sandbox.getQueryLink().indexOf('undefined') == -1) {
+          $('#shareUrl').val(sandbox.getQueryLink());
+          $('#sharebox').show();
+        }
       },
       error: function() {
         $('.alert').show();
@@ -184,6 +189,8 @@ var sandbox = {
   init: function(method) {
     // empty code container
     $('#resultContainer').empty();
+    // hide share
+    $('#sharebox').hide();
     // reset all optional fields
     sandbox.resetOptionalFields();
 

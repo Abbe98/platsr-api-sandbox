@@ -82,10 +82,14 @@ if ($('.nav-link').length) {
 // Copy Functions
 
 $('#copy').click(function() {
-  // try copy selected url
+  copy(document.querySelector('#requestUrlForm'));
+});
 
-  // select request url
-  element = document.querySelector('#requestUrlForm');
+$('#copyShare').click(function() {
+  copy(document.querySelector('#shareUrl'));
+});
+
+function copy(element) {
   // disabled inputs can not be selected by select()...
   element.disabled = false;
   element.select();
@@ -98,7 +102,9 @@ $('#copy').click(function() {
   }
 
   element.disabled = true;
-});
+}
+
+// Modals
 
 $('#modal').on('hidden.bs.modal', function (e) {
   $('#leaflet').css('cursor', 'default');

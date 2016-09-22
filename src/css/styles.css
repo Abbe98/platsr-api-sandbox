@@ -27,6 +27,7 @@ a.skip {
   overflow:hidden;
   z-index:-999;
 }
+
 .outer-header {
   padding-bottom: 12px;
   margin: auto;
