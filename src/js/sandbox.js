@@ -174,46 +174,46 @@ var sandbox = {
     sandbox.resetOptionalFields();
 
     // reset all other fields
-    if (!sandbox.getUrlParameter('uri')) {
-      $('#uriForm').val('');
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('uri')) {
       $('#uriForm').val(sandbox.getUrlParameter('uri'));
+    } else {
+      $('#uriForm').val('');
     }
 
-    if (!sandbox.getUrlParameter('text')) {
-      $('#searchForm').val('');
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('text')) {
       $('#searchForm').val(sandbox.getUrlParameter('text'));
+    } else {
+      $('#searchForm').val('');
     }
 
-    if (!sandbox.getUrlParameter('bbox')) {
-      $('#bboxForm').val('');
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('bbox')) {
       $('#bboxForm').val(sandbox.getUrlParameter('bbox'));
+    } else {
+      $('#bboxForm').val('');
     }
 
-    if (!sandbox.getUrlParameter('point')) {
-      $('#lradiusForm').val('');
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('point')) {
       $('#lradiusForm').val(sandbox.getUrlParameter('point'));
+    } else {
+      $('#lradiusForm').val('');
     }
 
-    if (!sandbox.getUrlParameter('radius')) {
-      $('#dradiusForm').val('');
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('radius')) {
       $('#dradiusForm').val(sandbox.getUrlParameter('radius'));
+    } else {
+      $('#dradiusForm').val('');
     }
 
-    if (!sandbox.getUrlParameter('archiveObject')) {
-      $('#archiveObjectUrlField').val('');
-    } else if (!sandbox.initized) {
-      $('#archiveObjectUrlField').val(sandbox.getUrlParameter('archiveObject'));
+    if (!sandbox.initized && sandbox.getUrlParameter('archiveObject')) {
+      $('#archiveObjectUrlForm').val(sandbox.getUrlParameter('archiveObject'));
+    } else {
+      $('#archiveObjectUrlForm').val('');
     }
 
-    if (!sandbox.getUrlParameter('userId')) {
-      $('#userIdField').val('');
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('userId')) {
       $('#userIdField').val(sandbox.getUrlParameter('userId'));
+    } else {
+      $('#userIdField').val('');
     }
 
     // hide all fields by default
@@ -375,36 +375,31 @@ var sandbox = {
   },
 
   resetOptionalFields: function() {
-    if (!sandbox.getUrlParameter('extracted')){
+    if (!sandbox.initized && sandbox.getUrlParameter('extracted')) {
+      $('#extract').attr('checked', true);
+    } else {
       $('#extract').attr('checked', false);
-      sandbox.setExtractParameter();
-    } else if (!sandbox.initized) {
-     $('#extract').attr('checked', true);
-     sandbox.setExtractParameter();
     }
+    sandbox.setExtractParameter();
 
-    if (!sandbox.getUrlParameter('sortBy')) {
-      $('#sortDescField').attr('checked', false);
-      sandbox.setSortParameter();
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('sortBy')) {
       $('#sortDescField').attr('checked', true);
-      sandbox.setSortParameter();
+    } else {
+      $('#sortDescField').attr('checked', false);
     }
+    sandbox.setSortParameter();
 
-    if (!sandbox.getUrlParameter('orderBy')) {
-      $('#orderByModifiedField').attr('checked', false);
-      sandbox.setOrderByParameter();
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('orderBy')) {
       $('#orderByModifiedField').attr('checked', true);
-      sandbox.setOrderByParameter();
+    } else {
+      $('#orderByModifiedField').attr('checked', false);
     }
+    sandbox.setOrderByParameter();
 
-    if (!sandbox.getUrlParameter('limit')) {
-      $('#limitField').val('');
-      sandbox.setLimitParameter();
-    } else if (!sandbox.initized) {
+    if (!sandbox.initized && sandbox.getUrlParameter('limit')) {
       $('#limitField').val(sandbox.getUrlParameter('limit'));
-      sandbox.setLimitParameter();
+    } else {
+      $('#limitField').val('');
     }
 
   },
