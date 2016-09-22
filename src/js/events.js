@@ -1,3 +1,11 @@
+$(document).ready(function() {
+  if (!sandbox.getUrlParameter('method')) {
+    sandbox.init('place'); $('#place').addClass('active');
+  } else {
+    sandbox.init(sandbox.getUrlParameter('method'));
+  }
+});
+
 $('#uriForm').on('input', function() {
   sandbox.setItemUri();
   sandbox.displayRelevantFields();
