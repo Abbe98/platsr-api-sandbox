@@ -79,6 +79,10 @@ if ($('.nav-link').length) {
   }
 }
 
+$('#run').click(function() {
+  sandbox.platsrRequest();
+});
+
 // Copy Functions
 
 $('#copy').click(function() {
