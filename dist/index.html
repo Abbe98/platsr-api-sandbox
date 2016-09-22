@@ -15,20 +15,20 @@
 			</div>
 
 			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
-				<li role="button" class="nav-link" onclick="sandbox.init('archiveObject'); $(this).addClass('active')">Archive Object<a href="docs.html#archiveObject"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('bookmark'); $(this).addClass('active')">Bookmark<a href="docs.html#bookmark"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('collection'); $(this).addClass('active')">Collection<a href="docs.html#collection"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('comment'); $(this).addClass('active')">Comment<a href="docs.html#comment"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('copyright'); $(this).addClass('active')">Copyright<a href="docs.html#copyright"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('image'); $(this).addClass('active')">Image<a href="docs.html#image"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('place'); $(this).addClass('active')" id="initBtn">Place<a href="docs.html#place"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('recomendation'); $(this).addClass('active')">Recommendation<a href="docs.html#recomendation"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('sound'); $(this).addClass('active')">Sound<a href="docs.html#sound"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('story'); $(this).addClass('active')">Story<a href="docs.html#story"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('tag'); $(this).addClass('active')">Tag<a href="docs.html#tag"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('user'); $(this).addClass('active')">User<a href="docs.html#user"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('video'); $(this).addClass('active')">Video<a href="docs.html#video"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
-				<li role="button" class="nav-link" onclick="sandbox.init('webAdress'); $(this).addClass('active')">Web Address<a href="docs.html#webAdress"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="archiveObject">Archive Object<a href="docs.html#archiveObject"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="bookmark">Bookmark<a href="docs.html#bookmark"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="collection">Collection<a href="docs.html#collection"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="comment">Comment<a href="docs.html#comment"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="copyright">Copyright<a href="docs.html#copyright"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="image">Image<a href="docs.html#image"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="place" id="initBtn">Place<a href="docs.html#place"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="recomendation">Recommendation<a href="docs.html#recomendation"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="sound">Sound<a href="docs.html#sound"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="story">Story<a href="docs.html#story"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="tag">Tag<a href="docs.html#tag"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="user">User<a href="docs.html#user"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="video">Video<a href="docs.html#video"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" id="webAdress">Web Address<a href="docs.html#webAdress"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
 			</ul>
 
 			<div class="col-md-9">
@@ -206,7 +206,7 @@
 		<link rel="stylesheet" href="css/secondary.min.css">
 		<script>
 		  if (!sandbox.getUrlParameter('method')) {
-		    sandbox.init('place'); $('#initBtn').addClass('active');
+		    sandbox.init('place'); $('#place').addClass('active');
 		  } else {
 		    sandbox.init(sandbox.getUrlParameter('method'));
 		  }

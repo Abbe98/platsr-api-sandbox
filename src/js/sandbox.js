@@ -220,6 +220,8 @@ var sandbox = {
     $('#fieldContainer').children().hide();
     // clear active elements
     $('.active').removeClass('active');
+    // set new active btn
+    $('#' + method).addClass('active');
     // update dummy URL
     $('#requestUrlForm').val(sandbox.dummyUrlPlaceholder + method);
     // show uri field for all methods

@@ -60,6 +60,15 @@ $('#bboxMapBtn').click(function() {
   sandbox.openModalBbox();
 });
 
+// Method menu
+if ($('.nav-link').length) {
+  for (var i = 0; i < document.getElementsByClassName('nav-link').length; i++) {
+    document.getElementsByClassName('nav-link')[i].addEventListener('click', function() {
+      sandbox.init(this.id);
+    });
+  }
+}
+
 // Copy Functions
 
 $('#copy').click(function() {
