@@ -13,14 +13,61 @@
 			<div class="row outer-header">
 				<header class="col-md-12 navbar navbar-light"><h1 class="navbar-brand">Platsr API Documentation</h1></header>
 			</div>
+			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
+				<li class="nav-item">
+					<a class="nav-link" href="#Introduction">Introduction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#archiveObject">Archive Object</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#bookmark">Bookmark</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#collection">Collection</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#comment">Comment</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#copyright">Copyright</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#image">Image</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#place">Place</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#recomendation">Recommendation</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#sound">Sound</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#story">Story</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#tag">Tag</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#user">User</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#video">Video</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#webAddress">Web Address</a>
+				</li>
+			</ul>
 			<div class="col-md-9">
 				<section id="Introduction">
 					<h2>Introduction</h2>
 					<p>The Platsr API gives you as a developer access to tons of local history data all witch is available under open licenses. <a href="https://www.platsr.se">Platsr.se</a> and its services is provided by the <a href="https://www.raa.se/">Swedish National Heritage Board</a>, this documentation and tool is developed and maintained by volunteers and should not be associated with the Swedish National Heritage Board.</p>
 					<p>The Platsr API implements a <code>GET</code> based REST-like interface with JSON responses.</p>
-					<p>The following documentation provides documentation for all methods available. It do not and do not aim to cover the JSON response format, for exploring it an <a href="sandbox.html">API sandbox</a> is provided.</p>
+					<p>The following documentation provides documentation for all methods available. It do not and do not aim to cover the JSON response format, for exploring it an <a href="index.html">API sandbox</a> is provided.</p>
 				</section>
-				<section id="ArchiveObject">
+				<section id="archiveObject">
 					<h2>Archive Object</h2>
 					<p><code>archiveObject</code> allows you to return a archive item based on it's URI. This method also allows a response based on an user ID that returns archive objects linked within Platsr by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -30,11 +77,11 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/platsr/api/v1/archiveObject/51000000016280</code></li>
-						<li><code>http://www.platsr.se/platsr/api/v1/archiveObject?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=archiveObject&uri=51000000016280&run=true">http://www.platsr.se/platsr/api/v1/archiveObject/51000000016280</a></code></li>
+						<li><code><a href="index.html?method=archiveObject&userId=Albin+Larsson&run=true">http://www.platsr.se/platsr/api/v1/archiveObject?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Bookmark">
+				<section id="bookmark">
 					<h2>Bookmark</h2>
 					<p><code>bookmark</code> allows you to return an user created bookmark. This method also allows a response based on an user ID that returns bookmarks by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -44,11 +91,11 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/bookmark/51000000002060</code></li>
-						<li><code>http://www.platsr.se/platsr/api/v1/bookmark?userId=Admin</code></li>
+						<li><code><a href="index.html?method=bookmark&uri=51000000002060&run=true">http://www.platsr.se/api/v1/bookmark/51000000002060</a></code></li>
+						<li><code><a href="index.html?method=bookmark&userId=Admin&run=true">http://www.platsr.se/platsr/api/v1/bookmark?userId=Admin</a></code></li>
 					</ul>
 				</section>
-				<section id="Collection">
+				<section id="collection">
 					<h2>Collection</h2>
 					<p><code>collection</code> allows you to return an user created collection. This method also allows a response based on an user ID that returns collections by that specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -58,11 +105,11 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/collection/51000000058701</code></li>
-						<li><code>http://www.platsr.se/platsr/api/v1/collection?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=collection&uri=51000000058701&run=true">http://www.platsr.se/api/v1/collection/51000000058701</a></code></li>
+						<li><code><a href="index.html?method=collection&userId=Albin+Larsson&run=true">http://www.platsr.se/platsr/api/v1/collection?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Comment">
+				<section id="comment">
 					<h2>Comment</h2>
 					<p><code>comment</code> allows you to return a comment. This method also allows a response based on an user ID that can return multiply comments by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -72,19 +119,19 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/comment/51000000061380</code></li>
-						<li><code>http://www.platsr.se/api/v1/comment?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=comment&uri=51000000061380&run=true">http://www.platsr.se/api/v1/comment/51000000061380</a></code></li>
+						<li><code><a href="index.html?method=comment&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/comment?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Copyright">
+				<section id="copyright">
 					<h2>Copyright</h2>
 					<p><code>copyright</code> allows you to copyright description by its ID.</p>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/copyright/511000</code></li>
+						<li><code><a href="index.html?method=comment&uri=511000&run=true">http://www.platsr.se/api/v1/copyright/511000</a></code></li>
 					</ul>
 				</section>
-				<section id="Image">
+				<section id="image">
 					<h2>Image</h2>
 					<p><code>image</code> allows you to return information about an image. This method also allows a response based on an user ID that can return multiply images uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -94,11 +141,11 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/image/51000000060560</code></li>
-						<li><code>http://www.platsr.se/api/v1/image?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=image&uri=51000000060560&run=true">http://www.platsr.se/api/v1/image/51000000060560</a></code></li>
+						<li><code><a href="index.html?method=image&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/image?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Place">
+				<section id="place">
 					<h2>Place</h2>
 					<p><code>place</code> allows you to retrieve a single place or a list of places. The <code>place</code> method has six incompatible parameters for returning lists and each parameter has multiply optional or required parameters.</p>
 					<ul>
@@ -137,14 +184,14 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/platsr/api/v1/place?bbox=619243%2C6518456%2C612326%2C6510471</code></li>
-						<li><code>http://www.platsr.se/platsr/api/v1/place?point=616194%2C6514159&radius=10000</code></li>
-						<li><code>http://www.platsr.se/platsr/api/v1/place?userId=Albin+Larsson</code></li>
-						<li><code>http://www.platsr.se/platsr/api/v1/place?archiveObjectUrl=raa/fmi/10090500420002&sortBy=desc</code></li>
-						<li><code>http://www.platsr.se/platsr/api/v1/place?text=Katrineholm&extracted=true</code></li>
+						<li><code><a href="index.html?method=place&bbox=619243%2C6518456%2C612326%2C6510471&run=true">http://www.platsr.se/platsr/api/v1/place?bbox=619243%2C6518456%2C612326%2C6510471</a></code></li>
+						<li><code><a href="index.html?method=place&point=616194%2C6514159&radius=10000&run=true">http://www.platsr.se/platsr/api/v1/place?point=616194%2C6514159&radius=10000</a></code></li>
+						<li><code><a href="index.html?method=place&userId=Albin+Larsson&run=true">http://www.platsr.se/platsr/api/v1/place?userId=Albin+Larsson</a></code></li>
+						<li><code><a href="index.html?method=place&archiveObjectUrl=raa/fmi/10090500420002&sortBy=desc&run=true">http://www.platsr.se/platsr/api/v1/place?archiveObjectUrl=raa/fmi/10090500420002&sortBy=desc</a></code></li>
+						<li><code><a href="index.html?method=place&text=Katrineholm&extracted=true&run=true">http://www.platsr.se/platsr/api/v1/place?text=Katrineholm&extracted=true</a></code></li>
 					</ul>
 				</section>
-				<section id="Recommendation">
+				<section id="recomendation">
 					<h2>Recommendation</h2>
 					<p><code>recomendation</code> allows you to return a recommendation. This method also allows a response based on an user ID that can return multiply recommendations made by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -155,11 +202,11 @@
 					<p><strong>NOTE:</strong> <code>recomendation</code> is the valid parameter name not <code>recommendation</code>.</p>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/platsr/api/v1/recomendation/51000000077244</code></li>
-						<li><code>http://www.platsr.se/api/v1/recomendation?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=recomendation&uri=51000000077244&run=true">http://www.platsr.se/platsr/api/v1/recomendation/51000000077244</a></code></li>
+						<li><code><a href="index.html?method=recomendation&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/recomendation?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Sound">
+				<section id="sound">
 					<h2>Sound</h2>
 					<p><code>sound</code> allows you to return information about an uploaded or linked sound. This method also allows a response based on an user ID that can return multiply sounds uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -169,11 +216,11 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/platsr/api/v1/sound/51000000064221</code></li>
-						<li><code>http://www.platsr.se/api/v1/sound?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=sound&uri=51000000064221&run=true">http://www.platsr.se/platsr/api/v1/sound/51000000064221</a></code></li>
+						<li><code><a href="index.html?method=sound&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/sound?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Story">
+				<section id="story">
 					<h2>Story</h2>
 					<p><code>story</code> allows you to return a story. This method also allows a response based on an user ID that can return multiply stories made by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -184,11 +231,11 @@
 					<p><strong>NOTE:</strong> <code>recomendation</code> is the valid parameter name not <code>recommendation</code>.</p>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/story/51000000058826</code></li>
-						<li><code>http://www.platsr.se/api/v1/story?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=story&uri=51000000058826&run=true">http://www.platsr.se/api/v1/story/51000000058826</a></code></li>
+						<li><code><a href="index.html?method=story&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/story?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Tag">
+				<section id="tag">
 					<h2>Tag</h2>
 					<p><code>tag</code> allows you to return a tag. This method also allows a response based on an user ID that can return multiply tags used by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -196,23 +243,22 @@
 						<li><code>sort</code> supported values: <code>decs</code> | <code>asc</code>(default)</li>
 						<li><code>limit</code> any positive integer</li>
 					</ul>
-					<p><strong>NOTE:</strong> <code>recomendation</code> is the valid parameter name not <code>recommendation</code>.</p>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/tag/51000000058820</code></li>
-						<li><code>http://www.platsr.se/api/v1/tag?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=tag&uri=51000000058820&run=true">http://www.platsr.se/api/v1/tag/51000000058820</a></code></li>
+						<li><code><a href="index.html?method=tag&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/tag?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="User">
+				<section id="user">
 					<h2>User</h2>
 					<p><code>user</code> allows you retrieve information about an specific user.</p>
 					<p><strong>NOTE:</strong> The user ID is not a integer as for other Platsr items.</p>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/user/Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=user&uri=Albin+Larsson&run=true">http://www.platsr.se/api/v1/user/Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="Video">
+				<section id="video">
 					<h2>Video</h2>
 					<p><code>video</code> allows you to return information about an uploaded or linked video. This method also allows a response based on an user ID that can return multiply sounds uploaded or linked by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -222,11 +268,11 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/platsr/api/v1/video/51000000017040</code></li>
-						<li><code>http://www.platsr.se/api/v1/video?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=video&uri=51000000017040&run=true">http://www.platsr.se/platsr/api/v1/video/51000000017040</a></code></li>
+						<li><code><a href="index.html?method=video&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/video?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
-				<section id="WebAddress">
+				<section id="webAddress">
 					<h2>Web Address</h2>
 					<p><code>webAddress</code> allows you to return information about an linked web address. This method also allows a response based on an user ID that can return information about multiply web addresses by an specific user. The <code>userId</code> parameter has three optional parameters:</p>
 					<ul>
@@ -236,58 +282,12 @@
 					</ul>
 					<h3>Examples</h3>
 					<ul>
-						<li><code>http://www.platsr.se/api/v1/webAdress/51000000016301</code></li>
-						<li><code>http://www.platsr.se/api/v1/webAddress?userId=Albin+Larsson</code></li>
+						<li><code><a href="index.html?method=webAdress&uri=51000000016301&run=true">http://www.platsr.se/api/v1/webAdress/51000000016301</a></code></li>
+						<li><code><a href="index.html?method=webAdress&userId=Albin+Larsson&run=true">http://www.platsr.se/api/v1/webAddress?userId=Albin+Larsson</a></code></li>
 					</ul>
 				</section>
 			</div>
-			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
-				<li class="nav-item">
-					<a class="nav-link" href="#Introduction">Introduction</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#ArchiveObject">Archive Object</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Bookmark">Bookmark</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Collection">Collection</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Comment">Comment</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Copyright">Copyright</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Image">Image</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Place">Place</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Recommendation">Recommendation</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Sound">Sound</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Story">Story</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Tag">Tag</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#User">User</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#Video">Video</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#WebAddress">Web Address</a>
-				</li>
-			</ul>
+
 			<div class="col-md-9">
 
 				<div class="modal" id="about" tabindex="-1" role="dialog">
@@ -337,8 +337,10 @@
 				<footer>
 					<nav class="nav nav-inline">
 						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
-						<a class="nav-link" href="sandbox.html">API Sandbox</a>
+						<a class="nav-link" href="index.html">API Sandbox</a>
 						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
+						<a class="nav-link" href="https://github.com/Abbe98/platsr-api-sandbox">Source</a>
+						<a class="nav-link" href="https://github.com/Abbe98/platsr-api-sandbox/issues">Bug Tracker</a>
 					</nav>
 				</footer>
 			</div>
