@@ -450,7 +450,7 @@ var sandbox = {
   },
 
   getQueryLink: function() {
-    var base = window.location.orgin + window.location.pathname.replace(/index\.html.+/g, '');
+    var base = window.location.origin + window.location.pathname.replace(/index\.html.+/g, '');
     return base + sandbox.buildQueryParameter();
   }
 }
