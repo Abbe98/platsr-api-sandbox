@@ -160,6 +160,20 @@ var sandbox = {
         hljs.initHighlighting.called = false;
         hljs.initHighlighting();
         $('#resultContainer').focus();
+
+        if ($('.hljs-string').length) {
+          for (var i = 0; i < document.getElementsByClassName('hljs-string').length; i++) {
+            var possibleLink = document.getElementsByClassName('hljs-string')[i].innerHTML.replace(/"/g, '');
+            if (possibleLink.indexOf('http://www.platsr.se/api/v1/') >= 0) {
+              if (possibleLink.indexOf('?') == -1) {
+                var methodAndUri = possibleLink.replace('http://www.platsr.se/api/v1/', '').split('/');
+                var sandboxUrl = 'index.html?method=' + methodAndUri[0] + '&uri=' + methodAndUri[1] + '&run=true';
+
+                document.getElementsByClassName('hljs-string')[i].innerHTML = '"' + '<a href="' + sandboxUrl + '">' + possibleLink + '</a>"';
+              }
+            }
+          }
+        }
       },
       error: function() {
         $('.alert').show();
