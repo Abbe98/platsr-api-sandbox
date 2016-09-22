@@ -415,22 +415,22 @@ var sandbox = {
     return(false);
   },
 
-  setQueryParameter: function() {
+  buildQueryParameter: function() {
     var queryValue = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, '');
     console.log(queryValue)
     if (queryValue.indexOf('?') >= 0) {
       queryValue = queryValue.replace('?', '&');
-      window.location.search = '?method=' + queryValue;
+      return '?method=' + queryValue;
     } else {
       var pair = queryValue.split('/');
       if (pair[1] != undefined) {
-        window.location.search = '?method=' + pair[0] + '&uri=' + pair[1];
+        return '?method=' + pair[0] + '&uri=' + pair[1];
       }
     }
   },
 
   getQueryLink: function() {
-    var queryValue = $('#requestUrlForm').val().replace(sandbox.dummyUrlPlaceholder, '').replace('?', '&');
-    return window.location.pathname + queryValue;
+    var base = window.location.pathname.replace(/index\.html.+/g, '');
+    return base + sandbox.buildQueryParameter();
   }
 }
