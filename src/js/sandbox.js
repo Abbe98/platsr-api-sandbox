@@ -404,11 +404,11 @@ var sandbox = {
   },
 
   getUrlParameter: function(parameter) {
-    var url = window.location.search.substring(1);
+    var url = window.location.search.substring(1).toLowerCase();
     var vars = url.split('&');
     for (var i = 0; i < vars.length; i++) {
       var pair = vars[i].split('=');
-      if (pair[0] == parameter) {
+      if (pair[0] == parameter.toLowerCase()) {
         return pair[1];
       }
     }
