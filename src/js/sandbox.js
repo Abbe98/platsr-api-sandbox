@@ -401,7 +401,6 @@ var sandbox = {
     } else {
       $('#limitField').val('');
     }
-
   },
 
   getUrlParameter: function(parameter) {
