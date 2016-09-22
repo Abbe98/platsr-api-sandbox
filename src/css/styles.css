@@ -63,6 +63,10 @@ input[type=text] {
   outline: 0;
 }
 
+.nav-link .tag {
+  margin-top: 3px;
+}
+
 .alert-container {
   position: absolute;
   float: right;
