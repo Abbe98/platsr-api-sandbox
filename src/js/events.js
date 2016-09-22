@@ -71,9 +71,11 @@ $('#bboxMapBtn').click(function() {
 // Method menu
 if ($('.nav-link').length) {
   for (var i = 0; i < document.getElementsByClassName('nav-link').length; i++) {
-    document.getElementsByClassName('nav-link')[i].addEventListener('click', function() {
-      sandbox.init(this.id);
-    });
+    if (document.getElementsByClassName('nav-link')[i].nodeName == 'LI') {
+      document.getElementsByClassName('nav-link')[i].addEventListener('click', function() {
+        sandbox.init(this.id);
+      });
+    }
   }
 }
 
