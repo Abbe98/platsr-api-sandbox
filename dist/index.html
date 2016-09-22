@@ -1,51 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Platsr Data</title>
+		<title>Platsr API Sandbox</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="css/main.min.css">
 	</head>
 	<body>
-		<div aria-hidden="true" id="bigFatMap">
+		<a href="#methodMenu" class="skip">Skip to method menu.</a>
+		<div class="fluid-container">
+			<div class="row outer-header">
+				<header class="col-md-12 navbar navbar-light"><h1 class="navbar-brand">Platsr API Sandbox</h1></header>
+			</div>
+
+			<ul class="col-md-3 nav nav-pills nav-stacked" id="methodMenu">
+				<li role="button" class="nav-link" onclick="sandbox.init('archiveObject'); $(this).addClass('active')">Archive Object<a href="docs.html#archiveObject"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('bookmark'); $(this).addClass('active')">Bookmark<a href="docs.html#bookmark"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('collection'); $(this).addClass('active')">Collection<a href="docs.html#collection"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('comment'); $(this).addClass('active')">Comment<a href="docs.html#comment"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('copyright'); $(this).addClass('active')">Copyright<a href="docs.html#copyright"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('image'); $(this).addClass('active')">Image<a href="docs.html#image"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('place'); $(this).addClass('active')" id="initBtn">Place<a href="docs.html#place"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('recomendation'); $(this).addClass('active')">Recommendation<a href="docs.html#recomendation"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('sound'); $(this).addClass('active')">Sound<a href="docs.html#sound"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('story'); $(this).addClass('active')">Story<a href="docs.html#story"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('tag'); $(this).addClass('active')">Tag<a href="docs.html#tag"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('user'); $(this).addClass('active')">User<a href="docs.html#user"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('video'); $(this).addClass('active')">Video<a href="docs.html#video"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+				<li role="button" class="nav-link" onclick="sandbox.init('webAdress'); $(this).addClass('active')">Web Address<a href="docs.html#webAdress"><span class="tag tag-primary pull-xs-right">docs</span></a></li>
+			</ul>
+
+			<div class="col-md-9">
+				<form>
+					<fieldset class="form-group">
+						<label for="requestUrlForm">Request URL</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="requestUrlForm" disabled value="http://www.platsr.se/platsr/api/v1/">
+							<span class="input-group-btn">
+								<button class="btn btn-secondary" id="copy" type="button">Copy</button>
+							</span>
+						</div>
+					</fieldset>
+
+					<div id="fieldContainer">
+
+						<fieldset class="form-group" style="display: none;" id="uriField">
+							<label for="uriForm">Item URI</label>
+							<input type="text" class="form-control" id="uriForm" placeholder="50000000000001">
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="searchField">
+							<label for="searchForm">Search Text</label>
+							<input type="text" class="form-control" id="searchForm" placeholder="Katrineholm">
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="bboxField">
+							<label for="bboxForm">Bounding Box</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="bboxForm" placeholder="751050,6635000,758242,6429670">
+								<span class="input-group-btn">
+									<button class="btn btn-secondary" type="button" id="bboxMapBtn" data-toggle="modal" data-target="#modal">Map</button>
+								</span>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="lradiusField">
+							<label for="lradiusForm">Center Location</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="lradiusForm" placeholder="519412,6468281">
+								<span class="input-group-btn">
+									<button class="btn btn-secondary" type="button" id="pointMapBtn" data-toggle="modal" data-target="#modal">Map</button>
+								</span>
+							</div>
+							<label for="dradiusForm">Radius</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="dradiusForm" placeholder="1000">
+								<div class="input-group-addon">meters</div>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="userIdSet">
+							<label for="userIdField">User ID</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="userIdField" placeholder="Albin+Larsson"></input>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="archiveObjectUrlSet">
+							<label for="archiveObjectUrlField">Archive Object</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="archiveObjectUrlField" placeholder="raa/fmi/10090500420002"></input>
+							</div>
+						</fieldset>
+
+						<fieldset class="form-group" style="display: none;" id="optionalGroup">
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="orderByModifiedField">
+								<span class="c-indicator"></span>
+								Order by last time modified.
+							</label><br>
+
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="sortDescField">
+								<span class="c-indicator"></span>
+								Sort in descending order.
+							</label><br>
+
+								<label for="limitField">Limit</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="limitField" placeholder="50"></input>
+								</div>
+						</fieldset>
+
+						<fieldset style="display: none;" id="extractField">
+							<label class="c-input c-checkbox">
+								<input type="checkbox" id="extract">
+								<span class="c-indicator"></span>
+								Extract Items
+							</label>
+						</fieldset>
+					</div>
+
+					<button type="button" class="btn btn-primary" onclick="sandbox.platsrRequest()">Run</button>
+
+					<div class="modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-body" id="leaflet"></div>
+								<button type="button" class="btn btn-primary" id="bboxSubmitBtn">OK</button>
+							</div>
+						</div>
+					</div>
+				</form>
+
+				<div class="alert alert-warning alert-dismissible" role="alert" style="display: none">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<strong>Request Error</strong> Platsr didn't like that request.
+				</div>
+
+				<pre><code id="resultContainer" class="json"></code></pre>
+
+				<div class="modal" id="about" tabindex="-1" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2>About</h2>
+								<span>Sandbox for the Platsr API.</span>
+							</div>
+
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="row">
+
+										<div class="col-md-6">
+											<h3>Libraries</h3>
+											<ul>
+												<li><a href="http://getbootstrap.com/">Bootstrap</a> - <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://jquery.com/">jQuery</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="http://leafletjs.com/">Leaflet</a> - <a href="https://github.com/Leaflet/Leaflet/blob/master/LICENSE">MIT</a></li>
+												<li><a href="http://proj4js.org/">Proj4JS</a> - <a href="https://github.com/proj4js/proj4js/blob/master/LICENSE.md">MIT</a></li>
+												<li><a href="https://github.com/heyman/leaflet-areaselect">Leaflet AreaSelect</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="http://medialize.github.io/URI.js/">URI.js</a> - <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+												<li><a href="https://highlightjs.org/">highlight.js</a> - <a href="https://github.com/isagalaev/highlight.js/blob/master/LICENSE">BSD</a></li>
+												<li><a href="https://github.com/Abbe98/proxy-gae">proxy-gae</a></li>
+											</ul>
+										</div>
+										<div class="col-md-6">
+											<h3>Services</h3>
+											<ul>
+												<li><a href="http://www.platsr.nu/platsrs-api/">Platsr API</a></li>
+												<li><a href="https://github.com/">Github</a> - Hosting</li>
+												<li><a href="https://cloud.google.com/appengine/">Google App Engine</a> - Backend hosting</li>
+												<li><a href="http://openstreetmap.se/tjanster">OpenStreetMap Sverige</a> - Map tiles</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" class="about-footer">
+								Developed by <a href="http://abbe98.github.io/" class="abbe">Albin Larsson</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<footer>
+					<nav class="nav nav-inline">
+						<a class="nav-link" href="#about" data-toggle="modal" data-target="#about">About</a>
+						<a class="nav-link" href="docs.html">API Docs</a>
+						<a class="nav-link" href="http://www.platsr.nu/platsrs-api/">Official Platsr API Docs</a>
+					</nav>
+				</footer>
+			</div>
+
 		</div>
-		<div class="overBigFatMap">
-			<header>
-				<h1>Platsr<br>
-					<small><span id="dataUsers"></span> Users</small><br>
-					<small><span id="dataPlaces"></span> Places</small>
-				</h1>
-			</header>
-			<nav>
-				<a href="sandbox.html" class="btn btn-primary btn-lg">Sandbox</a><a href="docs.html" class="btn btn-primary btn-lg">API Docs</a>
-			</nav>
-		</div>
+
+		<div class="alert-container"></div>
 
 		<script src="js/main.min.js"></script>
 		<script src="js/app.min.js"></script>
 
+		<link rel="stylesheet" href="css/secondary.min.css">
 		<script>
-		  splashMap = L.map('bigFatMap', {zoomControl: false}).setView([63, 17], 5);
-		  L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors & <a href="http://openstreetmap.se/">OpenStreetMap Sverige</a>',
-		    subdomains: 'abc'
-		  }).addTo(splashMap);
-
-		  $.ajax({
-		    url: 'http://gae-proxy-platsr.appspot.com/',
-		    dataType: 'text',
-		    success: function(result) {
-		      var usersRe = /\d+(?=<\/b>)/;
-		      var placesRe = /\d+(?= platser och samlingar)/;
-
-		      $('#dataUsers').text(result.match(usersRe)[0]);
-		      $('#dataPlaces').text(result.match(placesRe)[0]);
-		    },
-		    error: function() {
-		      console.log('Proxy error');
-		    }
-		  });
+		  if (!sandbox.getUrlParameter('method')) {
+		    sandbox.init('place'); $('#initBtn').addClass('active');
+		  } else {
+		    sandbox.init(sandbox.getUrlParameter('method'));
+		  }
 		</script>
 	</body>
 </html>
