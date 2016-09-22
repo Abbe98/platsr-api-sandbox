@@ -62,10 +62,6 @@ input[type=text] {
   outline: 0;
 }
 
-.c-input > input:checked ~ .c-indicator {
-  background-color: #D65128;
-}
-
 .alert-container {
   position: absolute;
   float: right;
