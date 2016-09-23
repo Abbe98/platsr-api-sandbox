@@ -8,7 +8,7 @@ var sandbox = {
   activeMethod: undefined,
   initized: false,
 
-  platsrEndpoint: 'http://gae-proxy-platsr.appspot.com/platsr/api/v1/', // CORS enabled proxy
+  platsrEndpoint: 'https://gae-proxy-platsr.appspot.com/platsr/api/v1/', // CORS enabled proxy
   dummyUrlPlaceholder: 'http://www.platsr.se/platsr/api/v1/',
 
   setExtractParameter: function() {
