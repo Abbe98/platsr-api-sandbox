@@ -19,13 +19,13 @@ a:focus {
 }
 
 a.skip {
-  left:-999px;
-  position:absolute;
+  left: -999px;
+  position: absolute;
   top:auto;
-  width:1px;
-  height:1px;
-  overflow:hidden;
-  z-index:-999;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: -999;
 }
 
 .outer-header {
