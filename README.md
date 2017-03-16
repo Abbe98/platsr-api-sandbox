@@ -26,4 +26,4 @@ Make sure you have push request to this Github repository and that all changes a
 
 ## License
 
-Licensed under [MIT](https://github.com/Abbe98/platsr-api-sandbox/blob/master/LICENSE).
+Licensed under [MIT](https://github.com/Abbe98/platsr-api-sandbox/blob/master/LICENSE). Note that Highlight.js included in this project is licensed under BSD 3.
